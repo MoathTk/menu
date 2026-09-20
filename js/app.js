@@ -51,10 +51,30 @@ function deriveRating(id) {
    Screen navigation
 ---------------------------------------------------------------------------- */
 function showScreen(name) {
+  var leaving = null;
+  ['splash', 'home', 'details'].forEach(function (n) {
+    if (n === name || $id('screen-' + n).hidden) return;
+    leaving = $id('screen-' + n);
+  });
+
+  if (leaving && leaving.id === 'screen-splash') {
+    leaving.classList.add('is-leaving');
+    setTimeout(function () { revealScreen(name); }, 300);
+  } else {
+    revealScreen(name);
+  }
+  window.scrollTo({ top: 0 });
+}
+
+function revealScreen(name) {
   ['splash', 'home', 'details'].forEach(function (n) {
     $id('screen-' + n).hidden = n !== name;
+    $id('screen-' + n).classList.remove('is-leaving');
   });
-  window.scrollTo({ top: 0 });
+  var el = $id('screen-' + name);
+  el.classList.remove('screen-enter');
+  void el.offsetWidth;
+  el.classList.add('screen-enter');
 }
 
 /* ---------------------------------------------------------------------------
@@ -395,7 +415,7 @@ function init() {
   });
 
   $id('splash-lang').addEventListener('click', toggleLang);
-  setTimeout(function () { showScreen('home'); }, 1500);
+  setTimeout(function () { showScreen('home'); }, 500);
 
   $id('search-input').addEventListener('input', function (e) {
     state.query = e.target.value;
