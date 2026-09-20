@@ -2,7 +2,7 @@ var I18N_STRINGS = {
   ar: {
     splash_title: 'ابقَ مركزاً',
     splash_sub: 'احصل على كوب من القهوة لتبقى مركزاً ومستيقظاً. أنواع مختلفة من القهوة لتناسب ذوقك.',
-    start_now: 'ابدأ الآن',
+    start_now: 'ادخل',
     home_title: 'ابحث عن أفضل قهوة لذوقك',
     search_placeholder: 'ابحث عن قهوتك...',
     category_all: 'الكل',
@@ -41,7 +41,7 @@ var I18N_STRINGS = {
   en: {
     splash_title: 'Stay focused',
     splash_sub: 'Get a cup of coffee to stay focused and awake. Different types of coffee to suit your taste.',
-    start_now: 'Start now',
+    start_now: 'Enter',
     home_title: 'Find the best coffee for your taste',
     search_placeholder: 'Search your coffee...',
     category_all: 'All',

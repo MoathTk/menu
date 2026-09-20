@@ -313,9 +313,25 @@ function renderHomeChrome() {
 }
 
 function renderSplash() {
-  $id('splash-title').textContent = t('splash_title', state.lang);
+  $id('splash-title').textContent = '';
   $id('splash-sub').textContent = t('splash_sub', state.lang);
+  revealCharByChar($id('splash-title'), t('splash_title', state.lang), 3000);
+  $id('start-label').textContent = t('start_now', state.lang);
   $id('splash-lang').textContent = state.lang === 'ar' ? 'EN' : 'AR';
+}
+
+function revealCharByChar(el, text, durationMs) {
+  el.innerHTML = '';
+  var step = durationMs / Math.max(text.length, 1);
+  var delay = 0;
+  for (var i = 0; i < text.length; i++) {
+    var s = document.createElement('span');
+    s.className = 'char-in';
+    s.textContent = text[i];
+    s.style.animationDelay = delay + 'ms';
+    el.appendChild(s);
+    delay += step;
+  }
 }
 
 function renderAll() {
@@ -341,7 +357,11 @@ function init() {
   });
 
   $id('splash-lang').addEventListener('click', toggleLang);
-  setTimeout(function () { showScreen('home'); }, 1000);
+
+  $id('start-btn').addEventListener('click', function (e) {
+    showScreen('home');
+    goldenGlow(e.clientX, e.clientY);
+  });
 
   $id('search-input').addEventListener('input', function (e) {
     state.query = e.target.value;
