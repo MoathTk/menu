@@ -259,6 +259,10 @@ body.app.is-en { font-family: var(--font-en); }
 /* ---- Product lists ---- */
 .category-lists { display: grid; gap: clamp(16px, 3vw, 26px); margin-top: 6px; }
 
+/* allow grid children to shrink below their content width on narrow screens
+   (prevents the horizontal product scroller from blowing out the page) */
+.cat-group { min-width: 0; }
+
 .cat-group-head {
   font-size: clamp(1rem, 3vw, 1.15rem);
   font-weight: 800;
