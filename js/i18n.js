@@ -7,17 +7,25 @@ var I18N_STRINGS = {
     sold_out: 'غير متوفر',
     no_results: 'لا توجد نتائج مطابقة',
     order_done: 'قائمة',
-    shop_default_name: 'مقهانا'
+    contact_phone: 'اتصل بنا',
+    contact_whatsapp: 'واتساب',
+    contact_instagram: 'انستغرام',
+    follow_us: 'تابعنا',
+    shop_default_name: 'مقهى رواق'
   },
   en: {
     search_placeholder: 'Search the menu...',
     all_categories: 'All',
-    currency: 'SAR',
+    currency: 'IQD',
     available: 'Available',
     sold_out: 'Sold out',
     no_results: 'No matching items',
     order_done: 'Menu',
-    shop_default_name: 'Our Coffee'
+    contact_phone: 'Call us',
+    contact_whatsapp: 'WhatsApp',
+    contact_instagram: 'Instagram',
+    follow_us: 'Follow us',
+    shop_default_name: 'RIWAQ CAFÉ'
   }
 };
 

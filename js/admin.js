@@ -61,10 +61,14 @@ function renderCategoryOptions() {
 
 function renderSettings() {
   var s = admin.menu.shop;
+  var c = s.contact || {};
   $id('shop-name-ar').value = s.name_ar;
   $id('shop-name-en').value = s.name_en;
   $id('shop-currency-ar').value = s.currency_symbol_ar;
   $id('shop-currency-en').value = s.currency_symbol_en;
+  $id('shop-phone-display').value = c.phone_display || '';
+  $id('shop-whatsapp').value = c.whatsapp || '';
+  $id('shop-instagram').value = c.instagram || '';
 }
 
 function renderCategoryList() {
@@ -358,12 +362,20 @@ document.querySelectorAll('.nav-item').forEach(function (btn) {
 });
 
 $id('save-settings').addEventListener('click', function () {
+  var contact = (admin.menu.shop.contact) ? admin.menu.shop.contact : {};
   admin.menu.shop = {
     name_ar: $id('shop-name-ar').value.trim(),
     name_en: $id('shop-name-en').value.trim(),
+    logo: (admin.menu.shop.logo) ? admin.menu.shop.logo : 'assets/images/logo.png',
     currency_code: (admin.menu.shop && admin.menu.shop.currency_code) || 'IQD',
     currency_symbol_ar: $id('shop-currency-ar').value.trim(),
-    currency_symbol_en: $id('shop-currency-en').value.trim()
+    currency_symbol_en: $id('shop-currency-en').value.trim(),
+    contact: {
+      phone_display: $id('shop-phone-display').value.trim(),
+      phone: contact.phone || '+964' + $id('shop-whatsapp').value.trim().replace(/^\+/, ''),
+      whatsapp: $id('shop-whatsapp').value.trim().replace(/^\+/, ''),
+      instagram: $id('shop-instagram').value.trim().replace(/^@/, '')
+    }
   };
   persist();
   alert('تم الحفظ');

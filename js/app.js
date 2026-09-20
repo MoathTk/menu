@@ -143,12 +143,48 @@ function renderItems() {
   empty.setAttribute('lang', state.lang);
 }
 
+function renderContacts(contact) {
+  var wrap = $id('footer-contacts');
+  wrap.innerHTML = '';
+  if (!contact) return;
+
+  var links = [
+    { href: 'tel:' + contact.phone, label: t('contact_phone', state.lang), show: contact.phone },
+    { href: 'https://wa.me/' + contact.whatsapp, label: t('contact_whatsapp', state.lang), show: contact.whatsapp },
+    { href: 'https://instagram.com/' + contact.instagram, label: t('contact_instagram', state.lang), show: contact.instagram }
+  ];
+
+  links.forEach(function (link) {
+    if (!link.show) return;
+    var a = document.createElement('a');
+    a.className = 'footer-link';
+    a.href = link.href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = link.label;
+    wrap.appendChild(a);
+  });
+
+  if (contact.phone_display) {
+    var p = document.createElement('p');
+    p.className = 'footer-phone';
+    p.textContent = contact.phone_display;
+    wrap.appendChild(p);
+  }
+}
+
 function renderShop() {
   var shop = state.menu.shop;
   var name = pickL10n(shop.name_ar, shop.name_en, state.lang);
+  var logo = $id('shop-logo');
+  if (logo) {
+    if (shop.logo) { logo.src = shop.logo; logo.alt = name; logo.hidden = false; }
+    else { logo.hidden = true; }
+  }
   $id('shop-name').textContent = name;
   $id('footer-flag').textContent = t('order_done', state.lang) + ' · ' + name;
   document.title = name;
+  renderContacts(shop.contact);
 }
 
 function renderToggleLabel() {
