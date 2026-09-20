@@ -85,12 +85,18 @@ body.app.is-en { font-family: var(--font-en); }
   border: 6px solid var(--surface-2);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   margin-bottom: clamp(20px, 4vw, 36px);
+  animation:
+    splashImgIn 0.95s cubic-bezier(0.2, 0.8, 0.25, 1) backwards,
+    floatY 5.5s ease-in-out 1.4s infinite,
+    glowPulse 3.6s ease-in-out 1.5s infinite;
 }
 
 .splash-title {
   font-size: clamp(1.9rem, 6vw, 2.8rem);
   font-weight: 800;
   margin: 0 0 10px;
+  animation: splashUp 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) backwards;
+  animation-delay: 0.45s;
 }
 
 .splash-sub {
@@ -99,6 +105,8 @@ body.app.is-en { font-family: var(--font-en); }
   line-height: 1.8;
   margin: 0 0 clamp(24px, 5vw, 38px);
   max-width: 42ch;
+  animation: splashUp 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) backwards;
+  animation-delay: 0.6s;
 }
 
 .splash-btn {
