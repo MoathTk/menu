@@ -15,7 +15,7 @@ function currencySymbol(shop, lang) {
 
 function formatPrice(value) {
   var n = Number(value) || 0;
-  return n.toLocaleString(undefined, { minimumFractionDigits: n % 1 ? 2 : 0 });
+  return n.toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0 });
 }
 
 function buildItemCard(item) {
