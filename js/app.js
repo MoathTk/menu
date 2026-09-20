@@ -415,7 +415,7 @@ function init() {
   });
 
   $id('splash-lang').addEventListener('click', toggleLang);
-  setTimeout(function () { showScreen('home'); }, 500);
+  setTimeout(function () { showScreen('home'); }, 1000);
 
   $id('search-input').addEventListener('input', function (e) {
     state.query = e.target.value;
