@@ -1,11 +1,3 @@
-var SIZES = [
-  { id: 's', letter: 'S', mult: 0.8 },
-  { id: 'm', letter: 'M', mult: 1 },
-  { id: 'l', letter: 'L', mult: 1.25 }
-];
-
-var CHOCOLATES = ['choc_white', 'choc_milk', 'choc_dark'];
-
 var state = {
   menu: null,
   lang: getLang(),
@@ -13,11 +5,7 @@ var state = {
   query: '',
   details: {
     item: null,
-    qty: 1,
-    sizeId: 'm',
-    chocId: 'choc_milk',
-    expanded: false,
-    fav: false
+    expanded: false
   }
 };
 
@@ -254,11 +242,7 @@ function renderFeatured() {
 ---------------------------------------------------------------------------- */
 function openDetails(item, ev) {
   state.details.item = item;
-  state.details.qty = 1;
-  state.details.sizeId = 'm';
-  state.details.chocId = 'choc_milk';
   state.details.expanded = false;
-  state.details.fav = false;
   renderDetails();
   showScreen('details');
   goldenGlow(ev ? ev.clientX : window.innerWidth / 2,
@@ -301,72 +285,17 @@ function renderDetails() {
   $id('d-desc-more').hidden = false;
   $id('d-read-more').hidden = true;
 
-  $id('d-fav').classList.toggle('is-active', d.fav);
-
   /* localize static labels */
   $id('d-desc-title').textContent = t('desc_title', state.lang);
-  $id('d-choc-title').textContent = t('chocolate_type', state.lang);
-  $id('d-size-title').textContent = t('size_label', state.lang);
-  $id('d-qty-title').textContent = t('quantity_label', state.lang);
   $id('d-price-label').textContent = t('price_label', state.lang);
-  $id('buy-label').textContent = t('buy_now', state.lang);
   $id('d-read-more').textContent = t('read_more', state.lang);
 
-  renderChocolateOptions();
-  renderSizeOptions();
-  renderQty();
   computeTotal();
-}
-
-function renderChocolateOptions() {
-  var row = $id('choc-options');
-  row.innerHTML = '';
-  CHOCOLATES.forEach(function (key) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'pill' + (state.details.chocId === key ? ' is-active' : '');
-    b.textContent = t(key, state.lang);
-    b.dataset.key = key;
-    b.addEventListener('click', function () {
-      state.details.chocId = key;
-      renderChocolateOptions();
-    });
-    row.appendChild(b);
-  });
-}
-
-function renderSizeOptions() {
-  var row = $id('size-options');
-  row.innerHTML = '';
-  SIZES.forEach(function (sz) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'size-btn' + (state.details.sizeId === sz.id ? ' is-active' : '');
-    b.innerHTML = '<span class="sz-letter">' + sz.letter + '</span><span>' + t('size_' + sz.id, state.lang) + '</span>';
-    b.dataset.id = sz.id;
-    b.addEventListener('click', function () {
-      state.details.sizeId = sz.id;
-      renderSizeOptions();
-      computeTotal();
-    });
-    row.appendChild(b);
-  });
-}
-
-function setQty(n) {
-  state.details.qty = Math.min(10, Math.max(1, n));
-  renderQty();
-  computeTotal();
-}
-
-function renderQty() {
-  $id('q-num').textContent = state.details.qty;
 }
 
 function computeTotal() {
-  var d = state.details;
-  var size = SIZES.filter(function (s) { return s.id === d.sizeId; })[0] || SIZES[1];
-  var total = Math.round(d.item.price * size.mult * d.qty);
+  var item = state.details.item;
+  var total = Math.round(item.price);
   $id('d-total').textContent = formatPrice(total) + ' ' + currencySymbol(state.menu.shop, state.lang);
 }
 
@@ -432,26 +361,11 @@ function init() {
     showScreen('home');
   });
 
-  $id('d-fav').addEventListener('click', function () {
-    state.details.fav = !state.details.fav;
-    $id('d-fav').classList.toggle('is-active', state.details.fav);
-  });
-
   $id('d-read-more').addEventListener('click', function () {
     state.details.expanded = !state.details.expanded;
     $id('d-read-more').textContent = state.details.expanded
       ? t('read_less', state.lang)
       : t('read_more', state.lang);
-  });
-
-  $id('q-minus').addEventListener('click', function () { setQty(state.details.qty - 1); });
-  $id('q-plus').addEventListener('click', function () { setQty(state.details.qty + 1); });
-
-  $id('buy-btn').addEventListener('click', function () {
-    var d = state.details;
-    var size = SIZES.filter(function (s) { return s.id === d.sizeId; })[0];
-    var total = formatPrice(Math.round(d.item.price * size.mult * d.qty));
-    alert(d.qty + ' × ' + pickL10n(d.item.name_ar, d.item.name_en, state.lang) + ' — ' + total + ' ' + currencySymbol(state.menu.shop, state.lang));
   });
 
   document.querySelectorAll('.bn-item').forEach(function (btn) {

@@ -187,38 +187,9 @@ body.app.is-en { font-family: var(--font-en); }
 .home-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: center;
   margin-bottom: 8px;
 }
-
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--surface-2);
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.header-actions { display: flex; gap: 10px; }
-
-.icon-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--surface-2);
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.icon-btn:hover { color: var(--text); }
 
 .home-brand { font-weight: 800; font-size: 1.1rem; }
 
@@ -521,8 +492,6 @@ body.app.is-en { font-family: var(--font-en); }
 }
 
 #d-back { left: 22px; }
-#d-fav { right: 22px; }
-#d-fav.is-active { color: var(--danger); }
 
 .details-body {
   padding: clamp(18px, 4vw, 30px) clamp(16px, 4vw, 32px) 10px;
@@ -572,75 +541,7 @@ body.app.is-en { font-family: var(--font-en); }
   margin-inline-start: 4px;
 }
 
-/* ---- selectable pill / size rows ---- */
-.pill-row { display: flex; gap: 10px; flex-wrap: wrap; }
-
-.pill {
-  background: var(--surface-2);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 11px 20px;
-  font-weight: 700;
-  font-size: 0.88rem;
-  transition: background 0.15s ease, color 0.15s ease;
-  flex: 0 1 auto;
-}
-
-.pill.is-active {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.size-btn {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  width: clamp(60px, 16vw, 76px);
-  height: clamp(56px, 15vw, 68px);
-  background: var(--surface-2);
-  color: var(--muted);
-  border-radius: 16px;
-  font-weight: 800;
-  font-size: clamp(0.72rem, 2.4vw, 0.82rem);
-}
-
-.size-btn .sz-letter {
-  font-size: clamp(0.9rem, 2.6vw, 1rem);
-  font-weight: 800;
-}
-
-.size-btn.is-active { background: var(--accent); color: #12100E; }
-
-/* ---- quantity ---- */
-.qty-row {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(16px, 5vw, 28px);
-  background: var(--surface-2);
-  border-radius: 999px;
-  padding: 8px 12px;
-}
-
-.qty-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--surface-3);
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.qty-btn:hover { color: var(--text); }
-
-.qty-num { font-weight: 800; font-size: 1.05rem; min-width: 18px; text-align: center; }
-
-.detail-spacer { height: 10px; }
-
-/* ---- bottom action bar (price + buy) ---- */
+/* ---- bottom price bar ---- */
 .bottom-bar {
   position: fixed;
   left: 0;
@@ -649,7 +550,8 @@ body.app.is-en { font-family: var(--font-en); }
   z-index: 30;
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  text-align: center;
   background: rgba(30, 27, 24, 0.94);
   backdrop-filter: blur(12px);
   border-top: 1px solid var(--border);
@@ -661,22 +563,6 @@ body.app.is-en { font-family: var(--font-en); }
 .price-label { color: var(--muted); font-size: 0.78rem; }
 
 .total-price { font-size: clamp(1.05rem, 3vw, 1.2rem); font-weight: 800; }
-
-.buy-btn {
-  flex: 1;
-  min-width: 0;
-  background: var(--accent);
-  color: #12100E;
-  border-radius: 999px;
-  padding: clamp(14px, 3vw, 17px) 20px;
-  font-weight: 800;
-  font-size: clamp(0.95rem, 2.8vw, 1.05rem);
-  box-shadow: 0 12px 26px rgba(212, 163, 89, 0.35);
-  transition: transform 0.12s ease;
-  white-space: nowrap;
-}
-
-.buy-btn:active { transform: scale(0.98); }
 
 /* ==========================================================================
    Responsive breakpoints
@@ -759,5 +645,4 @@ body.app.is-en { font-family: var(--font-en); }
   .item-card { width: 140px; }
   .item-media { height: 132px; }
   .home-title { font-size: 1.2rem; }
-  .qty-row { gap: 14px; }
 }
