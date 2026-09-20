@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin is-ar">
+  <section id="gate" class="gate">
+    <div class="gate-card">
+      <h1>لوحة التحكم</h1>
+      <p>أدخل رمز الدخول</p>
+      <input id="pin-input" class="input block" type="password" inputmode="numeric" autocomplete="off">
+      <button id="pin-submit" class="btn btn-primary block" type="button">دخول</button>
+      <p id="pin-error" class="pin-error" hidden>رمز غير صحيح</p>
+    </div>
+  </section>
+
+  <section id="admin-app" hidden>
+    <header class="admin-header">
+      <div>
+        <h1>لوحة التحكم</h1>
+        <p class="muted">عدّل القائمة ثم صدّر الملف وارفعه للمضيف ليظهر للعملاء</p>
+      </div>
+      <button id="logout-btn" class="btn btn-ghost" type="button">خروج</button>
+    </header>
+
+    <div class="admin-layout">
+      <aside class="admin-nav">
+        <button class="nav-item is-active" data-panel="settings" type="button">اعدادات المتجر</button>
+        <button class="nav-item" data-panel="categories" type="button">التصنيفات</button>
+        <button class="nav-item" data-panel="items" type="button">المنتجات</button>
+        <button class="nav-item" data-panel="publish" type="button">نشر &amp; تصدير</button>
+        <button class="nav-item" data-panel="qr" type="button">رمز QR</button>
+      </aside>
+
+      <main class="admin-main">
+        <section id="panel-settings" class="panel is-active">
+          <h2>اعدادات المتجر</h2>
+          <div class="grid-2">
+            <label>اسم المتجر - عربي
+              <input id="shop-name-ar" class="input" type="text">
+            </label>
+            <label>اسم المتجر - إنجليزي
+              <input id="shop-name-en" class="input" type="text" dir="ltr">
+            </label>
+            <label>رمز العملة - عربي
+              <input id="shop-currency-ar" class="input" type="text">
+            </label>
+            <label>رمز العملة - إنجليزي
+              <input id="shop-currency-en" class="input" type="text" dir="ltr">
+            </label>
+          </div>
+          <button id="save-settings" class="btn btn-primary" type="button">حفظ الإعدادات</button>
+        </section>
+
+        <section id="panel-categories" class="panel">
+          <h2>التصنيفات</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>إضافة تصنيف</h3>
+              <div class="grid-2">
+                <label>الاسم - عربي
+                  <input id="cat-name-ar" class="input" type="text">
+                </label>
+                <label>الاسم - إنجليزي
+                  <input id="cat-name-en" class="input" type="text" dir="ltr">
+                </label>
+                <label>أيقونة (إيموجي)
+                  <input id="cat-icon" class="input" type="text" maxlength="4">
+                </label>
+                <label>الترتيب
+                  <input id="cat-sort" class="input" type="number" value="0">
+                </label>
+              </div>
+              <button id="add-category" class="btn btn-primary" type="button">إضافة</button>
+            </div>
+            <div class="card">
+              <h3>التصنيفات الحالية</h3>
+              <ul id="category-list" class="admin-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="panel-items" class="panel">
+          <h2>المنتجات</h2>
+          <div class="card">
+            <h3>إضافة / تعديل منتج</h3>
+            <input id="item-editing-id" type="hidden">
+            <div class="grid-2">
+              <label>الاسم - عربي
+                <input id="item-name-ar" class="input" type="text">
+              </label>
+              <label>الاسم - إنجليزي
+                <input id="item-name-en" class="input" type="text" dir="ltr">
+              </label>
+              <label>الوصف - عربي
+                <input id="item-desc-ar" class="input" type="text">
+              </label>
+              <label>الوصف - إنجليزي
+                <input id="item-desc-en" class="input" type="text" dir="ltr">
+              </label>
+              <label>التصنيف
+                <select id="item-category" class="input"></select>
+              </label>
+              <label>السعر
+                <input id="item-price" class="input" type="number" min="0" step="0.5">
+              </label>
+              <label>الوسوم (مفصولة بفاصلة)
+                <input id="item-tags" class="input" type="text" placeholder="hot, veg">
+              </label>
+              <label>رابط الصورة (اختياري)
+                <input id="item-image" class="input" type="url" dir="ltr" placeholder="assets/images/x.jpg">
+              </label>
+              <label>الترتيب
+                <input id="item-sort" class="input" type="number" value="0">
+              </label>
+              <label class="checkbox-row">
+                <input id="item-available" type="checkbox" checked>
+                متوفر
+              </label>
+              <div class="form-actions">
+                <button id="save-item" class="btn btn-primary" type="button">حفظ المنتج</button>
+                <button id="cancel-item-edit" class="btn btn-ghost" type="button" hidden>إلغاء التعديل</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>المنتجات الحالية</h3>
+            <ul id="item-list" class="admin-list"></ul>
+          </div>
+        </section>
+
+        <section id="panel-publish" class="panel">
+          <h2>نشر &amp; تصدير</h2>
+          <div class="card">
+            <p class="muted">عدّلت على المتصفح فقط. ليراه العملاء، نزّل ملف <code>menu.json</code> وارفعه على مضيفك (GitHub Pages / Netlify) مكان الملف القديم.</p>
+            <div class="action-row">
+              <button id="export-btn" class="btn btn-primary" type="button">⬇ تحميل menu.json</button>
+              <button id="copy-btn" class="btn btn-ghost" type="button">نسخ JSON</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>استيراد / إعادة تعيين</h3>
+            <div class="action-row">
+              <input id="import-file" type="file" accept="application/json,.json" hidden>
+              <button id="import-btn" class="btn btn-ghost" type="button">استيراد ملف JSON</button>
+              <button id="reset-btn" class="btn btn-danger" type="button">استعادة الافتراضي</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="panel-qr" class="panel">
+          <h2>رمز QR</h2>
+          <div class="card">
+            <p class="muted">الصق رابط المتجر المنشور ثم اعرض الطابع للطباعة.</p>
+            <div class="action-row">
+              <input id="qr-url" class="input" type="url" dir="ltr" placeholder="https://your-shop.example.com/menu">
+              <button id="qr-generate" class="btn btn-primary" type="button">توليد</button>
+            </div>
+            <div id="qr-preview" class="qr-preview"></div>
+            <button id="qr-print" class="btn btn-ghost" type="button" hidden>طباعة الطابع</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <textarea id="copy-buffer" hidden></textarea>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/qrcode.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

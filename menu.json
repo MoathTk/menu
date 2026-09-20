@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "shop": {
+    "name_ar": "مقهانا",
+    "name_en": "Our Coffee",
+    "currency_code": "SAR",
+    "currency_symbol_ar": "ر.س",
+    "currency_symbol_en": "SAR"
+  },
+  "categories": [
+    {
+      "id": "hot",
+      "sort": 1,
+      "icon": "🔥",
+      "name_ar": "المشروبات الساخنة",
+      "name_en": "Hot Drinks"
+    },
+    {
+      "id": "iced",
+      "sort": 2,
+      "icon": "🧊",
+      "name_ar": "مشروبات مثلجة",
+      "name_en": "Iced Drinks"
+    },
+    {
+      "id": "cold",
+      "sort": 3,
+      "icon": "🥤",
+      "name_ar": "المشروبات الباردة",
+      "name_en": "Cold Drinks"
+    },
+    {
+      "id": "pastry",
+      "sort": 4,
+      "icon": "🥐",
+      "name_ar": "المعجنات",
+      "name_en": "Pastries"
+    },
+    {
+      "id": "dessert",
+      "sort": 5,
+      "icon": "🍰",
+      "name_ar": "الحلويات",
+      "name_en": "Desserts"
+    }
+  ],
+  "items": [
+    {
+      "id": "esp",
+      "category_id": "hot",
+      "sort": 1,
+      "tags": [
+        "hot",
+        "veg"
+      ],
+      "name_ar": "إسبريسو",
+      "name_en": "Espresso",
+      "desc_ar": "قهوة مركزة بجرعة مضاعفة",
+      "desc_en": "Double shot of rich espresso",
+      "price": 12,
+      "image": ""
+    },
+    {
+      "id": "cap",
+      "category_id": "hot",
+      "sort": 2,
+      "tags": [
+        "hot",
+        "veg"
+      ],
+      "name_ar": "كابتشينو",
+      "name_en": "Cappuccino",
+      "desc_ar": "إسبريسو مع حليب ورغوة كثيفة",
+      "desc_en": "Espresso with steamed milk and thick foam",
+      "price": 18,
+      "image": ""
+    },
+    {
+      "id": "lat",
+      "category_id": "hot",
+      "sort": 3,
+      "tags": [
+        "hot",
+        "veg"
+      ],
+      "name_ar": "لاتيه",
+      "name_en": "Latte",
+      "desc_ar": "إسبريسو مع حليب ناعم",
+      "desc_en": "Espresso topped with velvety milk",
+      "price": 20,
+      "image": ""
+    },
+    {
+      "id": "moc",
+      "category_id": "hot",
+      "sort": 4,
+      "tags": [
+        "hot",
+        "veg"
+      ],
+      "name_ar": "موكا",
+      "name_en": "Mocha",
+      "desc_ar": "إسبريسو مع شوكولاتة وحليب",
+      "desc_en": "Espresso with chocolate and milk",
+      "price": 22,
+      "image": ""
+    },
+    {
+      "id": "arabic",
+      "category_id": "hot",
+      "sort": 5,
+      "tags": [
+        "hot",
+        "veg",
+        "traditional"
+      ],
+      "name_ar": "قهوة عربية",
+      "name_en": "Arabic Coffee",
+      "desc_ar": "قهوة بالهيل تقدم مع التمر",
+      "desc_en": "Cardamom coffee served with dates",
+      "price": 16,
+      "image": ""
+    },
+    {
+      "id": "icel",
+      "category_id": "iced",
+      "sort": 1,
+      "tags": [
+        "cold",
+        "veg"
+      ],
+      "name_ar": "آيس لاتيه",
+      "name_en": "Iced Latte",
+      "desc_ar": "إسبريسو بارد مع حليب وثلج",
+      "desc_en": "Chilled espresso with milk over ice",
+      "price": 22,
+      "image": ""
+    },
+    {
+      "id": "icef",
+      "category_id": "iced",
+      "sort": 2,
+      "tags": [
+        "cold",
+        "veg"
+      ],
+      "name_ar": "فرابيه",
+      "name_en": "Frappe",
+      "desc_ar": "قهوة مثلجة مخفوقة مع كريمة",
+      "desc_en": "Blended iced coffee topped with cream",
+      "price": 24,
+      "image": ""
+    },
+    {
+      "id": "oj",
+      "category_id": "cold",
+      "sort": 1,
+      "tags": [
+        "cold",
+        "veg"
+      ],
+      "name_ar": "عصير برتقال طازج",
+      "name_en": "Fresh Orange Juice",
+      "desc_ar": "برتقال طبيعي 100%",
+      "desc_en": "100% freshly squeezed oranges",
+      "price": 14,
+      "image": ""
+    },
+    {
+      "id": "moj",
+      "category_id": "cold",
+      "sort": 2,
+      "tags": [
+        "cold",
+        "veg"
+      ],
+      "name_ar": "موهيتو ليمون",
+      "name_en": "Lemon Mint Mojito",
+      "desc_ar": "ليمون ونعناع منعش",
+      "desc_en": "Cooling lemon and fresh mint",
+      "price": 16,
+      "image": ""
+    },
+    {
+      "id": "cro",
+      "category_id": "pastry",
+      "sort": 1,
+      "tags": [
+        "veg"
+      ],
+      "name_ar": "كرواسون",
+      "name_en": "Croissant",
+      "desc_ar": "كرواسون فرنسي طري",
+      "desc_en": "Flaky buttery French croissant",
+      "price": 12,
+      "image": ""
+    },
+    {
+      "id": "chedp",
+      "category_id": "pastry",
+      "sort": 2,
+      "tags": [
+        "veg"
+      ],
+      "name_ar": "فطيرة جبن",
+      "name_en": "Cheese Pie",
+      "desc_ar": "معجنات محشوة بالجبن",
+      "desc_en": "Flaky pastry filled with cheese",
+      "price": 15,
+      "image": ""
+    },
+    {
+      "id": "cheesecake",
+      "category_id": "dessert",
+      "sort": 1,
+      "tags": [
+        "veg",
+        "dessert"
+      ],
+      "name_ar": "تشيز كيك",
+      "name_en": "Cheesecake",
+      "desc_ar": "تشيز كيك بالفراولة",
+      "desc_en": "Creamy strawberry cheesecake",
+      "price": 24,
+      "image": ""
+    },
+    {
+      "id": "kunafa",
+      "category_id": "dessert",
+      "sort": 2,
+      "tags": [
+        "veg",
+        "dessert",
+        "traditional"
+      ],
+      "name_ar": "كنافة نابلسية",
+      "name_en": "Kunafa",
+      "desc_ar": "كنافة بالجبن والقطر",
+      "desc_en": "Cheese kunafa with sugar syrup",
+      "price": 20,
+      "image": ""
+    }
+  ]
+}
