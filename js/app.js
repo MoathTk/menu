@@ -369,7 +369,6 @@ function renderHomeChrome() {
 function renderSplash() {
   $id('splash-title').textContent = t('splash_title', state.lang);
   $id('splash-sub').textContent = t('splash_sub', state.lang);
-  $id('start-label').textContent = t('start_now', state.lang);
   $id('splash-lang').textContent = state.lang === 'ar' ? 'EN' : 'AR';
 }
 
@@ -396,7 +395,7 @@ function init() {
   });
 
   $id('splash-lang').addEventListener('click', toggleLang);
-  $id('start-btn').addEventListener('click', function () { showScreen('home'); });
+  setTimeout(function () { showScreen('home'); }, 1500);
 
   $id('search-input').addEventListener('input', function (e) {
     state.query = e.target.value;
