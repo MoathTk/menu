@@ -4,10 +4,18 @@
   z-index: 10;
   background: linear-gradient(160deg, var(--brand-dark), var(--brand));
   color: #fff;
-  padding: 14px 16px calc(env(safe-area-inset-top) + 14px);
+  padding: 12px 14px calc(env(safe-area-inset-top) + 12px);
   border-radius: 0 0 22px 22px;
   box-shadow: var(--shadow);
   margin-bottom: 16px;
+}
+
+@media (min-width: 640px) {
+  .app-header { padding-inline: 28px; }
+}
+
+@media (min-width: 1024px) {
+  .app-header { padding-inline: 40px; }
 }
 
 .header-top {
@@ -93,15 +101,42 @@
 }
 
 .menu-list {
+  width: 100%;
   max-width: 540px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 14px;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .menu-list {
+    max-width: 760px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu-list {
+    max-width: 1120px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    padding: 0 28px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .menu-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1360px;
+  }
 }
 
 .item-card {
   display: flex;
+  flex-direction: row;
   gap: 14px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -122,6 +157,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .item-card { flex-direction: column; padding: 0 0 14px; }
+  .item-media {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .item-media-icon { font-size: 3rem; }
+  .item-body { padding: 0 14px; }
 }
 
 .item-media img { width: 100%; height: 100%; object-fit: cover; }
@@ -180,10 +228,14 @@
 .empty-state {
   text-align: center;
   color: var(--muted);
-  padding: 40px 16px;
+  padding: 40px 14px;
   font-size: 1rem;
   max-width: 540px;
   margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .empty-state { max-width: 760px; }
 }
 
 .app-footer {
