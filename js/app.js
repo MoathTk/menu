@@ -1,8 +1,24 @@
+var SIZES = [
+  { id: 's', letter: 'S', mult: 0.8 },
+  { id: 'm', letter: 'M', mult: 1 },
+  { id: 'l', letter: 'L', mult: 1.25 }
+];
+
+var CHOCOLATES = ['choc_white', 'choc_milk', 'choc_dark'];
+
 var state = {
   menu: null,
   lang: getLang(),
-  activeCategory: 'all',
-  query: ''
+  activeCat: 'all',
+  query: '',
+  details: {
+    item: null,
+    qty: 1,
+    sizeId: 'm',
+    chocId: 'choc_milk',
+    expanded: false,
+    fav: false
+  }
 };
 
 function $id(id) {
@@ -18,9 +34,84 @@ function formatPrice(value) {
   return n.toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0 });
 }
 
-function buildItemCard(item) {
+function formatQty(value) {
+  return Number(value).toLocaleString('en-US');
+}
+
+function deriveRating(id) {
+  var h = 0;
+  for (var i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 997;
+  return {
+    rating: (4.0 + (h % 10) / 10).toFixed(1),
+    reviews: formatQty(1500 + h % 7000)
+  };
+}
+
+/* ---------------------------------------------------------------------------
+   Screen navigation
+---------------------------------------------------------------------------- */
+function showScreen(name) {
+  ['splash', 'home', 'details'].forEach(function (n) {
+    $id('screen-' + n).hidden = n !== name;
+  });
+  window.scrollTo({ top: 0 });
+}
+
+/* ---------------------------------------------------------------------------
+   Home rendering
+---------------------------------------------------------------------------- */
+function sortedCategories() {
+  return state.menu.categories
+    .slice()
+    .sort(function (a, b) { return (a.sort || 0) - (b.sort || 0); });
+}
+
+function renderTabs() {
+  var nav = $id('category-tabs');
+  nav.innerHTML = '';
+  var all = document.createElement('button');
+  all.type = 'button';
+  all.className = 'cat-tab' + (state.activeCat === 'all' ? ' is-active' : '');
+  all.textContent = t('category_all', state.lang);
+  all.dataset.id = 'all';
+  nav.appendChild(all);
+
+  sortedCategories().forEach(function (cat) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cat-tab' + (state.activeCat === cat.id ? ' is-active' : '');
+    b.textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
+    b.dataset.id = cat.id;
+    nav.appendChild(b);
+  });
+
+  nav.querySelectorAll('.cat-tab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.activeCat = b.dataset.id;
+      renderTabs();
+      renderLists();
+      renderFeatured();
+    });
+  });
+}
+
+function filteredItems() {
+  var q = state.query.trim().toLowerCase();
+  return state.menu.items.filter(function (item) {
+    if (state.activeCat !== 'all' && item.category_id !== state.activeCat) return false;
+    if (!q) return true;
+    var hay = (
+      item.name_ar + ' ' + item.name_en + ' ' +
+      (item.desc_ar || '') + ' ' + (item.desc_en || '')
+    ).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  });
+}
+
+function buildCard(item) {
   var card = document.createElement('article');
-  card.className = 'item-card' + (item.available === false ? ' is-soldout' : '');
+  card.className = 'item-card';
+  card.addEventListener('click', function () { openDetails(item); });
 
   var media = document.createElement('div');
   media.className = 'item-media';
@@ -32,194 +123,335 @@ function buildItemCard(item) {
     media.appendChild(img);
   } else {
     var ph = document.createElement('span');
-    ph.className = 'item-media-icon';
+    ph.className = 'item-media-ph';
     ph.textContent = pickL10n(item.name_ar, item.name_en, state.lang).slice(0, 1);
     media.appendChild(ph);
   }
+
+  var r = deriveRating(item.id);
+  var badge = document.createElement('span');
+  badge.className = 'rating-badge';
+  badge.innerHTML =
+    '<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.5 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>' +
+    r.rating;
+  media.appendChild(badge);
   card.appendChild(media);
+
+  var catById = {};
+  state.menu.categories.forEach(function (c) { catById[c.id] = c; });
+  var cat = catById[item.category_id] || {};
 
   var body = document.createElement('div');
   body.className = 'item-body';
+  body.innerHTML =
+    '<h3 class="item-name">' + pickL10n(item.name_ar, item.name_en, state.lang) + '</h3>' +
+    '<p class="item-sub">' + pickL10n(cat.name_ar, cat.name_en, state.lang) + '</p>';
 
-  var heading = document.createElement('div');
-  heading.className = 'item-heading';
-  var name = document.createElement('h3');
-  name.className = 'item-name';
-  name.textContent = pickL10n(item.name_ar, item.name_en, state.lang);
+  var foot = document.createElement('div');
+  foot.className = 'item-foot';
   var price = document.createElement('span');
   price.className = 'item-price';
   price.textContent = formatPrice(item.price) + ' ' + currencySymbol(state.menu.shop, state.lang);
-  heading.appendChild(name);
-  heading.appendChild(price);
-  body.appendChild(heading);
+  var add = document.createElement('button');
+  add.type = 'button';
+  add.className = 'add-btn';
+  add.setAttribute('aria-label', '+');
+  add.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+  add.addEventListener('click', function (e) { e.stopPropagation(); openDetails(item); });
+  foot.appendChild(price);
+  foot.appendChild(add);
 
-  if (item.desc_ar || item.desc_en) {
-    var desc = document.createElement('p');
-    desc.className = 'item-desc';
-    desc.textContent = pickL10n(item.desc_ar, item.desc_en, state.lang);
-    body.appendChild(desc);
-  }
-
-  if (item.tags && item.tags.length) {
-    var badges = document.createElement('div');
-    badges.className = 'item-tags';
-    item.tags.forEach(function (tag) {
-      var b = document.createElement('span');
-      b.className = 'tag tag-' + tag;
-      b.textContent = tag;
-      badges.appendChild(b);
-    });
-    body.appendChild(badges);
-  }
-
-  if (item.available === false) {
-    var sold = document.createElement('span');
-    sold.className = 'soldout-label';
-    sold.textContent = t('sold_out', state.lang);
-    body.appendChild(sold);
-  }
-
+  body.appendChild(foot);
   card.appendChild(body);
   return card;
 }
 
-function renderCategories() {
-  var nav = $id('category-tabs');
-  nav.innerHTML = '';
-
-  var allBtn = document.createElement('button');
-  allBtn.className = 'cat-pill' + (state.activeCategory === 'all' ? ' is-active' : '');
-  allBtn.textContent = t('all_categories', state.lang);
-  allBtn.dataset.id = 'all';
-  nav.appendChild(allBtn);
-
-  state.menu.categories
-    .slice()
-    .sort(function (a, b) { return (a.sort || 0) - (b.sort || 0); })
-    .forEach(function (cat) {
-      var btn = document.createElement('button');
-      btn.className = 'cat-pill' + (state.activeCategory === cat.id ? ' is-active' : '');
-      btn.dataset.id = cat.id;
-      btn.textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
-      nav.appendChild(btn);
-    });
-
-  nav.querySelectorAll('.cat-pill').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      state.activeCategory = btn.dataset.id;
-      renderCategories();
-      renderItems();
-    });
-  });
-}
-
-function renderItems() {
-  var list = $id('menu-list');
-  var empty = $id('empty-state');
-  list.innerHTML = '';
-
-  var query = state.query.trim().toLowerCase();
-
-  var filtered = state.menu.items.filter(function (item) {
-    if (state.activeCategory !== 'all' && item.category_id !== state.activeCategory) return false;
-    if (!query) return true;
-    var hay = (
-      item.name_ar + ' ' + item.name_en + ' ' +
-      (item.desc_ar || '') + ' ' + (item.desc_en || '') + ' ' +
-      ((item.tags || []).join(' '))
-    ).toLowerCase();
-    return hay.indexOf(query) !== -1;
-  });
-
-  filtered
-    .slice()
-    .sort(function (a, b) { return (a.sort || 0) - (b.sort || 0); })
-    .forEach(function (item) {
-      list.appendChild(buildItemCard(item));
-    });
-
-  empty.hidden = filtered.length > 0;
-  empty.textContent = t('no_results', state.lang);
-  empty.setAttribute('lang', state.lang);
-}
-
-function renderContacts(contact) {
-  var wrap = $id('footer-contacts');
+function renderLists() {
+  var wrap = $id('category-lists');
   wrap.innerHTML = '';
-  if (!contact) return;
+  var items = filteredItems();
 
-  var links = [
-    { href: 'tel:' + contact.phone, label: t('contact_phone', state.lang), show: contact.phone },
-    { href: 'https://wa.me/' + contact.whatsapp, label: t('contact_whatsapp', state.lang), show: contact.whatsapp },
-    { href: 'https://instagram.com/' + contact.instagram, label: t('contact_instagram', state.lang), show: contact.instagram }
-  ];
+  if (!items.length) {
+    var empty = document.createElement('p');
+    empty.className = 'empty-note';
+    empty.textContent = t('no_results', state.lang);
+    wrap.appendChild(empty);
+    return;
+  }
 
-  links.forEach(function (link) {
-    if (!link.show) return;
-    var a = document.createElement('a');
-    a.className = 'footer-link';
-    a.href = link.href;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.textContent = link.label;
-    wrap.appendChild(a);
+  var byCat = {};
+  sortedCategories().forEach(function (c) { byCat[c.id] = []; });
+  items.forEach(function (i) {
+    if (!byCat[i.category_id]) byCat[i.category_id] = [];
+    byCat[i.category_id].push(i);
   });
 
-  if (contact.phone_display) {
-    var p = document.createElement('p');
-    p.className = 'footer-phone';
-    p.textContent = contact.phone_display;
-    wrap.appendChild(p);
-  }
+  Object.keys(byCat).forEach(function (cid) {
+    var list = byCat[cid];
+    if (!list.length) return;
+    var cat = state.menu.categories.filter(function (c) { return c.id === cid; })[0];
+
+    var group = document.createElement('div');
+    group.className = 'cat-group';
+    var head = document.createElement('h3');
+    head.className = 'cat-group-head';
+    head.textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
+    group.appendChild(head);
+
+    var row = document.createElement('div');
+    row.className = 'h-scroll';
+    list.forEach(function (item) { row.appendChild(buildCard(item)); });
+    group.appendChild(row);
+    wrap.appendChild(group);
+  });
 }
 
-function renderShop() {
+function renderFeatured() {
+  var cats = sortedCategories();
+  var items = filteredItems();
+  if (state.activeCat === 'all') {
+    items = state.menu.items;
+  }
+  var feats = items.filter(function (i) { return i.image; });
+  var item = feats[0] || state.menu.items[0];
+  if (!item) return;
+
+  var catById = {};
+  state.menu.categories.forEach(function (c) { catById[c.id] = c; });
+
+  var box = $id('featured-card');
+  box.innerHTML = '';
+  box.addEventListener('click', function () { openDetails(item); });
+
+  var media = document.createElement('div');
+  media.className = 'featured-media';
+  var img = document.createElement('img');
+  img.src = item.image || (state.menu.shop.logo || '');
+  img.alt = pickL10n(item.name_ar, item.name_en, state.lang);
+  media.appendChild(img);
+
+  var body = document.createElement('div');
+  body.className = 'featured-body';
+  body.innerHTML =
+    '<h3 class="featured-name">' + pickL10n(item.name_ar, item.name_en, state.lang) + '</h3>' +
+    '<p class="featured-sub">' + pickL10n((catById[item.category_id] || {}).name_ar || '', (catById[item.category_id] || {}).name_en || '', state.lang) + '</p>' +
+    '<div class="featured-foot">' +
+    '<span class="featured-price">' + formatPrice(item.price) + ' ' + currencySymbol(state.menu.shop, state.lang) + '</span>' +
+    '</div>';
+
+  box.appendChild(media);
+  box.appendChild(body);
+
+  $id('featured-title').textContent = t('special_for_you', state.lang);
+}
+
+/* ---------------------------------------------------------------------------
+   Details screen
+---------------------------------------------------------------------------- */
+function openDetails(item) {
+  state.details.item = item;
+  state.details.qty = 1;
+  state.details.sizeId = 'm';
+  state.details.chocId = 'choc_milk';
+  state.details.expanded = false;
+  state.details.fav = false;
+  renderDetails();
+  showScreen('details');
+}
+
+function renderDetails() {
+  var d = state.details;
+  var item = d.item;
   var shop = state.menu.shop;
-  var name = pickL10n(shop.name_ar, shop.name_en, state.lang);
-  var logo = $id('shop-logo');
-  if (logo) {
-    if (shop.logo) { logo.src = shop.logo; logo.alt = name; logo.hidden = false; }
-    else { logo.hidden = true; }
-  }
-  $id('shop-name').textContent = name;
-  $id('footer-flag').textContent = t('order_done', state.lang) + ' · ' + name;
-  document.title = name;
-  renderContacts(shop.contact);
+  var catById = {};
+  state.menu.categories.forEach(function (c) { catById[c.id] = c; });
+  var cat = catById[item.category_id] || {};
+
+  var name = pickL10n(item.name_ar, item.name_en, state.lang);
+
+  $id('d-image').src = item.image || shop.logo || '';
+  $id('d-image').alt = name;
+  $id('d-name').textContent = name;
+  $id('d-sub').textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
+
+  var r = deriveRating(item.id);
+  $id('d-rating').textContent = r.rating + ' (' + r.reviews + ')';
+  $id('d-roast').textContent = t('roast_medium', state.lang);
+
+  var full = item.desc_ar || t('default_desc', 'ar');
+  $id('d-desc-short').textContent = '';
+  $id('d-desc-more').textContent = full;
+  $id('d-desc-more').hidden = false;
+  $id('d-read-more').hidden = true;
+
+  $id('d-fav').classList.toggle('is-active', d.fav);
+
+  /* localize static labels */
+  $id('d-desc-title').textContent = t('desc_title', state.lang);
+  $id('d-choc-title').textContent = t('chocolate_type', state.lang);
+  $id('d-size-title').textContent = t('size_label', state.lang);
+  $id('d-qty-title').textContent = t('quantity_label', state.lang);
+  $id('d-price-label').textContent = t('price_label', state.lang);
+  $id('buy-label').textContent = t('buy_now', state.lang);
+  $id('d-read-more').textContent = t('read_more', state.lang);
+
+  renderChocolateOptions();
+  renderSizeOptions();
+  renderQty();
+  computeTotal();
 }
 
-function renderToggleLabel() {
-  var btn = $id('lang-toggle');
-  btn.innerHTML = state.lang === 'ar'
-    ? 'English <span class="lang-dot">EN</span>'
-    : 'العربية <span class="lang-dot">AR</span>';
+function renderChocolateOptions() {
+  var row = $id('choc-options');
+  row.innerHTML = '';
+  CHOCOLATES.forEach(function (key) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pill' + (state.details.chocId === key ? ' is-active' : '');
+    b.textContent = t(key, state.lang);
+    b.dataset.key = key;
+    b.addEventListener('click', function () {
+      state.details.chocId = key;
+      renderChocolateOptions();
+    });
+    row.appendChild(b);
+  });
+}
+
+function renderSizeOptions() {
+  var row = $id('size-options');
+  row.innerHTML = '';
+  SIZES.forEach(function (sz) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'size-btn' + (state.details.sizeId === sz.id ? ' is-active' : '');
+    b.innerHTML = '<span class="sz-letter">' + sz.letter + '</span><span>' + t('size_' + sz.id, state.lang) + '</span>';
+    b.dataset.id = sz.id;
+    b.addEventListener('click', function () {
+      state.details.sizeId = sz.id;
+      renderSizeOptions();
+      computeTotal();
+    });
+    row.appendChild(b);
+  });
+}
+
+function setQty(n) {
+  state.details.qty = Math.min(10, Math.max(1, n));
+  renderQty();
+  computeTotal();
+}
+
+function renderQty() {
+  $id('q-num').textContent = state.details.qty;
+}
+
+function computeTotal() {
+  var d = state.details;
+  var size = SIZES.filter(function (s) { return s.id === d.sizeId; })[0] || SIZES[1];
+  var total = Math.round(d.item.price * size.mult * d.qty);
+  $id('d-total').textContent = formatPrice(total) + ' ' + currencySymbol(state.menu.shop, state.lang);
+}
+
+/* ---------------------------------------------------------------------------
+   Static localization (splash, home chrome)
+---------------------------------------------------------------------------- */
+function renderHomeChrome() {
+  $id('home-title').textContent = t('home_title', state.lang);
+  $id('search-input').placeholder = t('search_placeholder', state.lang);
+  var brand = state.menu && state.menu.shop
+    ? pickL10n(state.menu.shop.name_ar, state.menu.shop.name_en, state.lang)
+    : t('shop_default_name', state.lang);
+  $id('home-brand').textContent = brand;
+  document.title = brand;
+}
+
+function renderSplash() {
+  $id('splash-title').textContent = t('splash_title', state.lang);
+  $id('splash-sub').textContent = t('splash_sub', state.lang);
+  $id('start-label').textContent = t('start_now', state.lang);
+  $id('splash-lang').textContent = state.lang === 'ar' ? 'EN' : 'AR';
 }
 
 function renderAll() {
   applyLang(state.lang);
-  renderToggleLabel();
+  renderSplash();
+  renderHomeChrome();
   if (!state.menu) return;
-  renderShop();
-  renderCategories();
-  renderItems();
+  renderTabs();
+  renderLists();
+  renderFeatured();
+  if (state.details.item) renderDetails();
 }
 
+/* ---------------------------------------------------------------------------
+   Init / wiring
+---------------------------------------------------------------------------- */
 function init() {
   applyLang(state.lang);
+
   loadMenu(function (menu) {
     state.menu = menu;
     renderAll();
   });
 
-  $id('lang-toggle').addEventListener('click', function () {
-    state.lang = state.lang === 'ar' ? 'en' : 'ar';
-    setLang(state.lang);
-    renderAll();
-  });
+  $id('splash-lang').addEventListener('click', toggleLang);
+  $id('start-btn').addEventListener('click', function () { showScreen('home'); });
 
   $id('search-input').addEventListener('input', function (e) {
     state.query = e.target.value;
-    renderItems();
+    renderTabs();
+    renderLists();
+    renderFeatured();
   });
+
+  $id('filter-btn').addEventListener('click', function () {
+    $id('search-input').focus();
+  });
+
+  $id('d-back').addEventListener('click', function () {
+    state.query = '';
+    $id('search-input').value = '';
+    renderAll();
+    showScreen('home');
+  });
+
+  $id('d-fav').addEventListener('click', function () {
+    state.details.fav = !state.details.fav;
+    $id('d-fav').classList.toggle('is-active', state.details.fav);
+  });
+
+  $id('d-read-more').addEventListener('click', function () {
+    state.details.expanded = !state.details.expanded;
+    $id('d-read-more').textContent = state.details.expanded
+      ? t('read_less', state.lang)
+      : t('read_more', state.lang);
+  });
+
+  $id('q-minus').addEventListener('click', function () { setQty(state.details.qty - 1); });
+  $id('q-plus').addEventListener('click', function () { setQty(state.details.qty + 1); });
+
+  $id('buy-btn').addEventListener('click', function () {
+    var d = state.details;
+    var size = SIZES.filter(function (s) { return s.id === d.sizeId; })[0];
+    var total = formatPrice(Math.round(d.item.price * size.mult * d.qty));
+    alert(d.qty + ' × ' + pickL10n(d.item.name_ar, d.item.name_en, state.lang) + ' — ' + total + ' ' + currencySymbol(state.menu.shop, state.lang));
+  });
+
+  document.querySelectorAll('.bn-item').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.bn-item').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+    });
+  });
+}
+
+function toggleLang() {
+  state.lang = state.lang === 'ar' ? 'en' : 'ar';
+  setLang(state.lang);
+  applyLang(state.lang);
+  renderAll();
 }
 
 init();

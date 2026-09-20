@@ -3,39 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#4a3426">
+  <meta name="theme-color" content="#0C0F14">
   <link rel="icon" href="assets/images/logo.png">
-  <title>Menu</title>
+  <title>مقهى رواق</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/menu.css">
 </head>
-<body class="is-ar">
-  <header class="app-header">
-    <div class="header-top">
-      <div class="shop-brand">
-        <img id="shop-logo" class="shop-logo" alt="">
-        <h1 id="shop-name" class="shop-name"></h1>
-      </div>
-      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Language"></button>
+<body class="app is-ar">
+
+  <!-- ============ Screen 1: Welcome / Splash ============ -->
+  <section id="screen-splash" class="screen screen-splash">
+    <div class="splash-inner">
+      <button id="splash-lang" class="splash-lang" type="button">EN</button>
+      <img id="splash-img" class="splash-img" src="assets/images/hot-4.jpg" alt="">
+      <h1 id="splash-title" class="splash-title"></h1>
+      <p id="splash-sub" class="splash-sub"></p>
+      <button id="start-btn" class="splash-btn" type="button">
+        <span id="start-label">ابدأ الآن</span>
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
     </div>
+  </section>
+
+  <!-- ============ Screen 2: Home / Menu ============ -->
+  <section id="screen-home" class="screen screen-home" hidden>
+    <header class="home-header">
+      <span class="avatar" title="Profile">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </span>
+      <span id="home-brand" class="home-brand">مقهى رواق</span>
+      <span class="header-actions">
+        <button id="home-menu" class="icon-btn" type="button" aria-label="Menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </span>
+    </header>
+
+    <h1 id="home-title" class="home-title">ابحث عن أفضل قهوة لذوقك</h1>
+
     <div class="search-row">
-      <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
-      <input id="search-input" class="search-input" type="search" autocomplete="off" spellcheck="false">
+      <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <input id="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="ابحث عن قهوتك...">
+      <button id="filter-btn" class="filter-btn" type="button" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      </button>
     </div>
-    <nav id="category-tabs" class="category-tabs" aria-label="Categories"></nav>
-  </header>
 
-  <main id="menu-list" class="menu-list" aria-live="polite"></main>
+    <nav id="category-tabs" class="cat-tabs" aria-label="Categories"></nav>
 
-  <p id="empty-state" class="empty-state" hidden></p>
+    <main class="home-content">
+      <div id="category-lists" class="category-lists"></div>
+      <section class="featured-section">
+        <h2 id="featured-title" class="section-title"></h2>
+        <div id="featured-card" class="featured-card"></div>
+      </section>
+    </main>
 
-  <footer class="app-footer">
-    <div id="footer-contacts" class="footer-contacts"></div>
-    <span id="footer-flag"></span>
-  </footer>
+    <nav class="bottom-nav">
+      <button class="bn-item is-active" data-nav="home" type="button" aria-label="Home">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+      </button>
+      <button class="bn-item" data-nav="fav" type="button" aria-label="Favorites">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.6-9.3-9C1 7.6 2.8 4.5 6 4.5c2 0 3.4 1.2 6 3.5 2.6-2.3 4-3.5 6-3.5 3.2 0 5 3.1 3.3 6.5C19 15.4 12 20 12 20z"/></svg>
+      </button>
+      <button class="bn-item" data-nav="cart" type="button" aria-label="Cart">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.5 13h-15L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      </button>
+      <button class="bn-item" data-nav="notif" type="button" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+      </button>
+      <button class="bn-item" data-nav="profile" type="button" aria-label="Profile">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </button>
+    </nav>
+  </section>
+
+  <!-- ============ Screen 3: Item Details ============ -->
+  <section id="screen-details" class="screen screen-details" hidden>
+    <div class="details-hero">
+      <img id="d-image" src="" alt="">
+      <button id="d-back" class="circle-btn" type="button" aria-label="Back">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button id="d-fav" class="circle-btn" type="button" aria-label="Favorite">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.6-9.3-9C1 7.6 2.8 4.5 6 4.5c2 0 3.4 1.2 6 3.5 2.6-2.3 4-3.5 6-3.5 3.2 0 5 3.1 3.3 6.5C19 15.4 12 20 12 20z"/></svg>
+      </button>
+    </div>
+
+    <div class="details-body">
+      <div class="details-head">
+        <div>
+          <h1 id="d-name" class="details-name"></h1>
+          <p id="d-sub" class="details-sub"></p>
+          <div class="rating-row">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.5 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            <span id="d-rating" class="rating-text"></span>
+          </div>
+        </div>
+        <div class="roast-chip">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" opacity="0.9"><path d="M7 6c-1.5 3.5.5 7 3 10s5 5 7 3c1-2 .5-5-2-8S8.5 6.5 7 6z"/></svg>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" opacity="0.9"><path d="M12 3c-4 4-6 7-6 10.5A6 6 0 0 0 12 21c1.5-4 .5-7-1.5-9.5C8 9 8.5 6 12 3z"/></svg>
+          <span id="d-roast"></span>
+        </div>
+      </div>
+
+      <section class="details-block">
+        <h2 id="d-desc-title" class="block-title"></h2>
+        <p class="desc-text">
+          <span id="d-desc-short"></span><span id="d-desc-more" class="desc-more" hidden></span>
+          <button id="d-read-more" class="read-more" type="button">اقرأ المزيد</button>
+        </p>
+      </section>
+
+      <section class="details-block">
+        <h2 id="d-choc-title" class="block-title"></h2>
+        <div id="choc-options" class="pill-row"></div>
+      </section>
+
+      <section class="details-block">
+        <h2 id="d-size-title" class="block-title"></h2>
+        <div id="size-options" class="pill-row"></div>
+      </section>
+
+      <section class="details-block">
+        <h2 id="d-qty-title" class="block-title"></h2>
+        <div class="qty-row">
+          <button id="q-minus" class="qty-btn" type="button" aria-label="Decrease">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
+          </button>
+          <span id="q-num" class="qty-num">1</span>
+          <button id="q-plus" class="qty-btn" type="button" aria-label="Increase">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <div class="detail-spacer"></div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="price-col">
+        <span id="d-price-label" class="price-label"></span>
+        <strong id="d-total" class="total-price"></strong>
+      </div>
+      <button id="buy-btn" class="buy-btn" type="button"><span id="buy-label"></span></button>
+    </div>
+  </section>
 
   <script src="js/data.js"></script>
   <script src="js/i18n.js"></script>
