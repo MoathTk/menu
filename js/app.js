@@ -18,7 +18,7 @@ function formatPrice(value) {
   return n.toLocaleString(undefined, { minimumFractionDigits: n % 1 ? 2 : 0 });
 }
 
-function buildItemCard(item, category) {
+function buildItemCard(item) {
   var card = document.createElement('article');
   card.className = 'item-card' + (item.available === false ? ' is-soldout' : '');
 
@@ -33,7 +33,7 @@ function buildItemCard(item, category) {
   } else {
     var ph = document.createElement('span');
     ph.className = 'item-media-icon';
-    ph.textContent = category.icon || '☕';
+    ph.textContent = pickL10n(item.name_ar, item.name_en, state.lang).slice(0, 1);
     media.appendChild(ph);
   }
   card.appendChild(media);
@@ -100,7 +100,7 @@ function renderCategories() {
       var btn = document.createElement('button');
       btn.className = 'cat-pill' + (state.activeCategory === cat.id ? ' is-active' : '');
       btn.dataset.id = cat.id;
-      btn.textContent = (cat.icon ? cat.icon + ' ' : '') + pickL10n(cat.name_ar, cat.name_en, state.lang);
+      btn.textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
       nav.appendChild(btn);
     });
 
@@ -119,8 +119,6 @@ function renderItems() {
   list.innerHTML = '';
 
   var query = state.query.trim().toLowerCase();
-  var catById = {};
-  state.menu.categories.forEach(function (c) { catById[c.id] = c; });
 
   var filtered = state.menu.items.filter(function (item) {
     if (state.activeCategory !== 'all' && item.category_id !== state.activeCategory) return false;
@@ -137,7 +135,7 @@ function renderItems() {
     .slice()
     .sort(function (a, b) { return (a.sort || 0) - (b.sort || 0); })
     .forEach(function (item) {
-      list.appendChild(buildItemCard(item, catById[item.category_id] || {}));
+      list.appendChild(buildItemCard(item));
     });
 
   empty.hidden = filtered.length > 0;

@@ -3,16 +3,16 @@ var DEFAULT_MENU = {
   shop: {
     name_ar: 'رواق',
     name_en: 'Riwaq',
-    currency_code: 'SAR',
-    currency_symbol_ar: 'ر.س',
-    currency_symbol_en: 'SAR'
+    currency_code: 'IQD',
+    currency_symbol_ar: 'د.ع',
+    currency_symbol_en: 'IQD'
   },
   categories: [
-    { id: 'hot',   sort: 1, icon: '🔥', name_ar: 'المشروبات الساخنة', name_en: 'Hot Drinks' },
-    { id: 'iced',  sort: 2, icon: '🧊', name_ar: 'مشروبات مثلجة',    name_en: 'Iced Drinks' },
-    { id: 'cold',  sort: 3, icon: '🥤', name_ar: 'المشروبات الباردة', name_en: 'Cold Drinks' },
-    { id: 'pastry', sort: 4, icon: '🥐', name_ar: 'المعجنات',        name_en: 'Pastries' },
-    { id: 'dessert', sort: 5, icon: '🍰', name_ar: 'الحلويات',       name_en: 'Desserts' }
+    { id: 'hot',   sort: 1, name_ar: 'المشروبات الساخنة', name_en: 'Hot Drinks' },
+    { id: 'iced',  sort: 2, name_ar: 'مشروبات مثلجة',    name_en: 'Iced Drinks' },
+    { id: 'cold',  sort: 3, name_ar: 'المشروبات الباردة', name_en: 'Cold Drinks' },
+    { id: 'pastry', sort: 4, name_ar: 'المعجنات',        name_en: 'Pastries' },
+    { id: 'dessert', sort: 5, name_ar: 'الحلويات',       name_en: 'Desserts' }
   ],
   items: [
     { id: 'esp', category_id: 'hot', sort: 1, tags: ['hot', 'veg'],

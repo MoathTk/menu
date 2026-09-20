@@ -168,13 +168,20 @@
     aspect-ratio: 16 / 10;
     border-radius: var(--radius) var(--radius) 0 0;
   }
-  .item-media-icon { font-size: 3rem; }
+  .item-media-icon {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .item-media-icon { font-size: 3.4rem; }
+}
   .item-body { padding: 0 14px; }
 }
 
 .item-media img { width: 100%; height: 100%; object-fit: cover; }
-
-.item-media-icon { font-size: 2.2rem; }
 
 .item-body { flex: 1; min-width: 0; }
 

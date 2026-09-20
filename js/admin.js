@@ -54,7 +54,7 @@ function renderCategoryOptions() {
   }).forEach(function (cat) {
     var opt = document.createElement('option');
     opt.value = cat.id;
-    opt.textContent = (cat.icon || '') + ' ' + cat.name_ar + ' / ' + cat.name_en;
+    opt.textContent = cat.name_ar + ' / ' + cat.name_en;
     select.appendChild(opt);
   });
 }
@@ -78,7 +78,7 @@ function renderCategoryList() {
 
     var info = document.createElement('div');
     info.className = 'admin-row-info';
-    info.innerHTML = '<strong>' + esc(cat.icon) + ' ' + esc(cat.name_ar) + '</strong>' +
+    info.innerHTML = '<strong>' + esc(cat.name_ar) + '</strong>' +
       '<small>' + esc(cat.name_en) + '</small>';
 
     var actions = document.createElement('div');
@@ -152,13 +152,11 @@ function addCategory() {
   admin.menu.categories.push({
     id: uid('c'),
     sort: Number($id('cat-sort').value) || 0,
-    icon: $id('cat-icon').value.trim() || '☕',
     name_ar: nameAr,
     name_en: nameEn
   });
   $id('cat-name-ar').value = '';
   $id('cat-name-en').value = '';
-  $id('cat-icon').value = '';
   $id('cat-sort').value = '0';
   persist();
   renderAll();
@@ -169,13 +167,10 @@ function editCategory(cat) {
   if (nameAr === null) return;
   var nameEn = prompt('اسم التصنيف - إنجليزي', cat.name_en);
   if (nameEn === null) return;
-  var icon = prompt('أيقونة (إيموجي)', cat.icon);
-  if (icon === null) return;
   var sort = prompt('الترتيب', String(cat.sort || 0));
   if (sort === null) return;
   cat.name_ar = nameAr.trim();
   cat.name_en = nameEn.trim();
-  cat.icon = icon.trim() || '☕';
   cat.sort = Number(sort) || 0;
   persist();
   renderAll();
@@ -366,7 +361,7 @@ $id('save-settings').addEventListener('click', function () {
   admin.menu.shop = {
     name_ar: $id('shop-name-ar').value.trim(),
     name_en: $id('shop-name-en').value.trim(),
-    currency_code: 'SAR',
+    currency_code: (admin.menu.shop && admin.menu.shop.currency_code) || 'IQD',
     currency_symbol_ar: $id('shop-currency-ar').value.trim(),
     currency_symbol_en: $id('shop-currency-en').value.trim()
   };
