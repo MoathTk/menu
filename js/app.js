@@ -122,7 +122,7 @@ function filteredItems() {
 function buildCard(item) {
   var card = document.createElement('article');
   card.className = 'item-card';
-  card.addEventListener('click', function () { openDetails(item); });
+  card.addEventListener('click', function (e) { openDetails(item, e); });
 
   var media = document.createElement('div');
   media.className = 'item-media';
@@ -161,7 +161,7 @@ function buildCard(item) {
   add.className = 'add-btn';
   add.setAttribute('aria-label', '+');
   add.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
-  add.addEventListener('click', function (e) { e.stopPropagation(); openDetails(item); });
+  add.addEventListener('click', function (e) { e.stopPropagation(); openDetails(item, e); });
   foot.appendChild(price);
   foot.appendChild(add);
 
@@ -225,7 +225,7 @@ function renderFeatured() {
 
   var box = $id('featured-card');
   box.innerHTML = '';
-  box.addEventListener('click', function () { openDetails(item); });
+  box.addEventListener('click', function (e) { openDetails(item, e); });
 
   var media = document.createElement('div');
   media.className = 'featured-media';
@@ -252,7 +252,7 @@ function renderFeatured() {
 /* ---------------------------------------------------------------------------
    Details screen
 ---------------------------------------------------------------------------- */
-function openDetails(item) {
+function openDetails(item, ev) {
   state.details.item = item;
   state.details.qty = 1;
   state.details.sizeId = 'm';
@@ -261,6 +261,21 @@ function openDetails(item) {
   state.details.fav = false;
   renderDetails();
   showScreen('details');
+  goldenGlow(ev ? ev.clientX : window.innerWidth / 2,
+            ev ? ev.clientY : window.innerHeight / 2);
+}
+
+function goldenGlow(x, y) {
+  var glow = document.createElement('div');
+  glow.className = 'golden-glow';
+  glow.style.left = x + 'px';
+  glow.style.top = y + 'px';
+  var s = Math.hypot(window.innerWidth, window.innerHeight) * 1.35 / 120;
+  glow.style.setProperty('--s', s.toFixed(1));
+  document.body.appendChild(glow);
+  glow.addEventListener('animationend', function () {
+    glow.remove();
+  }, { once: true });
 }
 
 function renderDetails() {
