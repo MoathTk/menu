@@ -58,7 +58,7 @@
       "desc_ar": "قهوة مركزة بجرعة مضاعفة",
       "desc_en": "Double shot of rich espresso",
       "price": 12,
-      "image": ""
+      "image": "assets/images/esp.jpg"
     },
     {
       "id": "cap",
@@ -73,7 +73,7 @@
       "desc_ar": "إسبريسو مع حليب ورغوة كثيفة",
       "desc_en": "Espresso with steamed milk and thick foam",
       "price": 18,
-      "image": ""
+      "image": "assets/images/cap.jpg"
     },
     {
       "id": "lat",
@@ -88,7 +88,7 @@
       "desc_ar": "إسبريسو مع حليب ناعم",
       "desc_en": "Espresso topped with velvety milk",
       "price": 20,
-      "image": ""
+      "image": "assets/images/lat.jpg"
     },
     {
       "id": "moc",
@@ -103,7 +103,7 @@
       "desc_ar": "إسبريسو مع شوكولاتة وحليب",
       "desc_en": "Espresso with chocolate and milk",
       "price": 22,
-      "image": ""
+      "image": "assets/images/moc.jpg"
     },
     {
       "id": "arabic",
@@ -119,7 +119,7 @@
       "desc_ar": "قهوة بالهيل تقدم مع التمر",
       "desc_en": "Cardamom coffee served with dates",
       "price": 16,
-      "image": ""
+      "image": "assets/images/arabic.jpg"
     },
     {
       "id": "icel",
@@ -134,7 +134,7 @@
       "desc_ar": "إسبريسو بارد مع حليب وثلج",
       "desc_en": "Chilled espresso with milk over ice",
       "price": 22,
-      "image": ""
+      "image": "assets/images/icel.jpg"
     },
     {
       "id": "icef",
@@ -149,7 +149,7 @@
       "desc_ar": "قهوة مثلجة مخفوقة مع كريمة",
       "desc_en": "Blended iced coffee topped with cream",
       "price": 24,
-      "image": ""
+      "image": "assets/images/icef.jpg"
     },
     {
       "id": "oj",
@@ -164,7 +164,7 @@
       "desc_ar": "برتقال طبيعي 100%",
       "desc_en": "100% freshly squeezed oranges",
       "price": 14,
-      "image": ""
+      "image": "assets/images/oj.jpg"
     },
     {
       "id": "moj",
@@ -179,7 +179,7 @@
       "desc_ar": "ليمون ونعناع منعش",
       "desc_en": "Cooling lemon and fresh mint",
       "price": 16,
-      "image": ""
+      "image": "assets/images/moj.jpg"
     },
     {
       "id": "cro",
@@ -193,7 +193,7 @@
       "desc_ar": "كرواسون فرنسي طري",
       "desc_en": "Flaky buttery French croissant",
       "price": 12,
-      "image": ""
+      "image": "assets/images/cro.jpg"
     },
     {
       "id": "chedp",
@@ -207,7 +207,7 @@
       "desc_ar": "معجنات محشوة بالجبن",
       "desc_en": "Flaky pastry filled with cheese",
       "price": 15,
-      "image": ""
+      "image": "assets/images/chedp.jpg"
     },
     {
       "id": "cheesecake",
@@ -222,7 +222,7 @@
       "desc_ar": "تشيز كيك بالفراولة",
       "desc_en": "Creamy strawberry cheesecake",
       "price": 24,
-      "image": ""
+      "image": "assets/images/cheesecake.jpg"
     },
     {
       "id": "kunafa",
@@ -238,7 +238,7 @@
       "desc_ar": "كنافة بالجبن والقطر",
       "desc_en": "Cheese kunafa with sugar syrup",
       "price": 20,
-      "image": ""
+      "image": "assets/images/kunafa.jpg"
     }
   ]
 }
