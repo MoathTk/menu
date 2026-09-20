@@ -38,15 +38,6 @@ function formatQty(value) {
   return Number(value).toLocaleString('en-US');
 }
 
-function deriveRating(id) {
-  var h = 0;
-  for (var i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 997;
-  return {
-    rating: (4.0 + (h % 10) / 10).toFixed(1),
-    reviews: formatQty(1500 + h % 7000)
-  };
-}
-
 /* ---------------------------------------------------------------------------
    Screen navigation
 ---------------------------------------------------------------------------- */
@@ -148,13 +139,6 @@ function buildCard(item) {
     media.appendChild(ph);
   }
 
-  var r = deriveRating(item.id);
-  var badge = document.createElement('span');
-  badge.className = 'rating-badge';
-  badge.innerHTML =
-    '<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.5 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>' +
-    r.rating;
-  media.appendChild(badge);
   card.appendChild(media);
 
   var catById = {};
@@ -294,8 +278,6 @@ function renderDetails() {
   $id('d-name').textContent = name;
   $id('d-sub').textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
 
-  var r = deriveRating(item.id);
-  $id('d-rating').textContent = r.rating + ' (' + r.reviews + ')';
   $id('d-roast').textContent = t('roast_medium', state.lang);
 
   var full = item.desc_ar || t('default_desc', 'ar');
