@@ -124,8 +124,8 @@ body.app.is-en { font-family: var(--font-en); }
 .splash-lang:hover { color: var(--text); }
 
 .splash-img {
-  width: clamp(170px, 52vw, 300px);
-  height: clamp(170px, 52vw, 300px);
+  width: clamp(210px, 60vw, 400px);
+  height: clamp(210px, 60vw, 400px);
   object-fit: cover;
   border-radius: 50%;
   border: 6px solid rgba(212, 163, 89, 0.35);
