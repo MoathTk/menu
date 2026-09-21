@@ -1,7 +1,6 @@
 var I18N_STRINGS = {
   ar: {
-    splash_title: 'ابقَ مركزاً',
-    splash_sub: 'احصل على كوب من القهوة لتبقى مركزاً ومستيقظاً. أنواع مختلفة من القهوة لتناسب ذوقك.',
+    splash_title: 'اضغط للدخول إلى عالم رواق',
     start_now: 'ادخل',
     home_title: 'ابحث عن أفضل قهوة لذوقك',
     search_placeholder: 'ابحث عن قهوتك...',
@@ -39,8 +38,7 @@ var I18N_STRINGS = {
     shop_default_name: 'مقهى رواق'
   },
   en: {
-    splash_title: 'Stay focused',
-    splash_sub: 'Get a cup of coffee to stay focused and awake. Different types of coffee to suit your taste.',
+    splash_title: 'Click to enter Riwaq world',
     start_now: 'Enter',
     home_title: 'Find the best coffee for your taste',
     search_placeholder: 'Search your coffee...',

@@ -249,6 +249,28 @@ function openDetails(item, ev) {
             ev ? ev.clientY : window.innerHeight / 2);
 }
 
+var audioCtx = null;
+
+function playClick() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    var t = audioCtx.currentTime;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(950, t);
+    osc.frequency.exponentialRampToValueAtTime(320, t + 0.08);
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(0.16, t + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(t);
+    osc.stop(t + 0.12);
+  } catch (e) {}
+}
+
 function goldenGlow(x, y) {
   var glow = document.createElement('div');
   glow.className = 'golden-glow';
@@ -314,7 +336,6 @@ function renderHomeChrome() {
 
 function renderSplash() {
   $id('splash-title').textContent = '';
-  $id('splash-sub').textContent = t('splash_sub', state.lang);
   revealCharByChar($id('splash-title'), t('splash_title', state.lang), 3000);
   $id('start-label').textContent = t('start_now', state.lang);
   $id('splash-lang').textContent = state.lang === 'ar' ? 'EN' : 'AR';
@@ -350,6 +371,10 @@ function renderAll() {
 ---------------------------------------------------------------------------- */
 function init() {
   applyLang(state.lang);
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('button, .item-card, .featured-card')) playClick();
+  }, true);
 
   loadMenu(function (menu) {
     state.menu = menu;

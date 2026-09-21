@@ -164,15 +164,10 @@ body.app.is-en { font-family: var(--font-en); }
   }
 }
 
-@keyframes splashUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: none; }
-}
-
 .splash-title {
-  font-size: clamp(1.9rem, 6vw, 2.8rem);
+  font-size: clamp(1.5rem, 5vw, 2.3rem);
   font-weight: 800;
-  margin: 0 0 10px;
+  margin: 0 0 clamp(28px, 5vw, 40px);
 }
 
 .char-in {
@@ -184,16 +179,6 @@ body.app.is-en { font-family: var(--font-en); }
 
 @keyframes charIn {
   to { opacity: 1; filter: blur(0); }
-}
-
-.splash-sub {
-  color: var(--muted);
-  font-size: clamp(0.92rem, 2.6vw, 1.05rem);
-  line-height: 1.8;
-  margin: 0 0 clamp(24px, 5vw, 38px);
-  max-width: 42ch;
-  animation: splashUp 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) backwards;
-  animation-delay: 3.1s;
 }
 
 .splash-btn {
@@ -217,7 +202,7 @@ body.app.is-en { font-family: var(--font-en); }
     0 1px 6px rgba(0, 0, 0, 0.35);
   transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.2s ease;
   animation: btnAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  animation-delay: 1.8s;
+  animation-delay: 3.2s;
 }
 
 .splash-btn .icon { transition: transform 0.25s ease; }
