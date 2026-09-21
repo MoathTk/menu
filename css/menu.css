@@ -128,11 +128,11 @@ body.app.is-en { font-family: var(--font-en); }
   height: clamp(210px, 60vw, 400px);
   object-fit: cover;
   border-radius: 50%;
-  border: 6px solid rgba(212, 163, 89, 0.35);
+  border: 6px solid rgba(255, 209, 120, 0.55);
   box-shadow:
-    0 0 26px rgba(212, 163, 89, 0.55),
-    0 0 64px rgba(212, 163, 89, 0.3),
-    inset 0 0 22px rgba(212, 163, 89, 0.25);
+    0 0 34px rgba(255, 200, 92, 0.9),
+    0 0 90px rgba(255, 190, 70, 0.6),
+    inset 0 0 30px rgba(255, 209, 120, 0.45);
   margin-bottom: clamp(20px, 4vw, 36px);
   animation:
     splashImgIn 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) backwards,
@@ -152,15 +152,15 @@ body.app.is-en { font-family: var(--font-en); }
 @keyframes glowPulse {
   0%, 100% {
     box-shadow:
-      0 0 26px rgba(212, 163, 89, 0.55),
-      0 0 64px rgba(212, 163, 89, 0.3),
-      inset 0 0 22px rgba(212, 163, 89, 0.25);
+      0 0 34px rgba(255, 200, 92, 0.9),
+      0 0 90px rgba(255, 190, 70, 0.6),
+      inset 0 0 30px rgba(255, 209, 120, 0.45);
   }
   50% {
     box-shadow:
-      0 0 40px rgba(212, 163, 89, 0.9),
-      0 0 100px rgba(212, 163, 89, 0.5),
-      inset 0 0 30px rgba(212, 163, 89, 0.4);
+      0 0 60px rgba(255, 214, 110, 1),
+      0 0 140px rgba(255, 200, 80, 0.85),
+      inset 0 0 44px rgba(255, 219, 130, 0.65);
   }
 }
 
