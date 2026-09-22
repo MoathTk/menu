@@ -35,7 +35,7 @@ body.app.is-en { font-family: var(--font-en); }
 
 .screen[hidden] { display: none; }
 
-.screen { animation: fadeUp 0.28s ease; animation-fill-mode: both; }
+.screen { animation: fadeUp 0.28s ease; animation-fill-mode: backwards; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
@@ -44,11 +44,11 @@ body.app.is-en { font-family: var(--font-en); }
 
 /* Splash → home reveal choreography */
 .screen.screen-enter {
-  animation: screenIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: screenIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .screen-splash.is-leaving {
-  animation: splashOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: splashOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes screenIn {
