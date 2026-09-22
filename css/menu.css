@@ -510,6 +510,40 @@ body.app.is-en { font-family: var(--font-en); }
 
 .featured-price { font-weight: 800; color: var(--accent); }
 
+/* ---- Shop footer (contact) ---- */
+.shop-footer {
+  margin-top: clamp(30px, 6vw, 52px);
+  padding-top: clamp(18px, 4vw, 26px);
+  border-top: 1px solid var(--border);
+}
+
+.shop-footer-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 18px;
+}
+
+.shop-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.shop-footer-link:hover { background: var(--accent-soft); }
+
+.shop-footer-link:active { transform: scale(0.97); }
+
+.shop-footer-link svg { flex-shrink: 0; }
+
 /* ---- Bottom navigation (floating pill on desktop) ---- */
 .bottom-nav {
   position: fixed;

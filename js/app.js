@@ -401,6 +401,29 @@ function renderHomeChrome() {
   $id('home-logo').src = logo;
   $id('home-logo').alt = brand;
   document.title = brand;
+  renderFooter();
+}
+
+function renderFooter() {
+  var contact = (state.menu && state.menu.shop && state.menu.shop.contact) || {};
+  var phoneLink = $id('footer-phone');
+  var instaLink = $id('footer-insta');
+
+  if (contact.phone || contact.phone_display || contact.whatsapp) {
+    phoneLink.href = 'tel:' + (contact.phone || '+' + (contact.whatsapp || ''));
+    $id('footer-phone-label').textContent = contact.phone_display || contact.phone || '+' + contact.whatsapp;
+    phoneLink.hidden = false;
+  } else {
+    phoneLink.hidden = true;
+  }
+
+  if (contact.instagram) {
+    instaLink.href = 'https://instagram.com/' + contact.instagram.replace(/^@/, '');
+    $id('footer-insta-label').textContent = '@' + contact.instagram.replace(/^@/, '');
+    instaLink.hidden = false;
+  } else {
+    instaLink.hidden = true;
+  }
 }
 
 function renderSplash() {
