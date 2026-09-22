@@ -276,17 +276,41 @@ function playClick() {
   } catch (e) {}
 }
 
+var glowRingPool = [];
+var GLOW_RING_COUNT = 20;
+var GLOW_RING_DURATION = 250;
+
+function createGlowRing() {
+  var el = document.createElement('div');
+  el.className = 'golden-ring';
+  el.addEventListener('animationend', function () {
+    el.classList.remove('animate');
+    el.removeAttribute('style');
+    document.body.removeChild(el);
+    glowRingPool.push(el);
+  });
+  return el;
+}
+
+function acquireGlowRing() {
+  return glowRingPool.length ? glowRingPool.pop() : createGlowRing();
+}
+
 function goldenGlow(x, y) {
-  var glow = document.createElement('div');
-  glow.className = 'golden-glow';
-  glow.style.left = x + 'px';
-  glow.style.top = y + 'px';
   var s = Math.hypot(window.innerWidth, window.innerHeight) * 1.35 / 120;
-  glow.style.setProperty('--s', s.toFixed(1));
-  document.body.appendChild(glow);
-  glow.addEventListener('animationend', function () {
-    glow.remove();
-  }, { once: true });
+  var step = GLOW_RING_DURATION / GLOW_RING_COUNT;
+  for (var i = 0; i < GLOW_RING_COUNT; i++) {
+    var el = acquireGlowRing();
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.setProperty('--s', s.toFixed(1));
+    el.style.animationDuration = GLOW_RING_DURATION + 'ms';
+    el.style.animationDelay = Math.round(step * i) + 'ms';
+    document.body.appendChild(el);
+    el.classList.remove('animate');
+    void el.getBoundingClientRect();
+    el.classList.add('animate');
+  }
 }
 
 function renderDetails() {

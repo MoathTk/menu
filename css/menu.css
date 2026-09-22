@@ -60,8 +60,12 @@ body.app.is-en { font-family: var(--font-en); }
   to { opacity: 0; transform: scale(1.05); filter: blur(8px); }
 }
 
-/* ---- Golden ripple transition (item → details) ---- */
-.golden-glow {
+/* ---- Golden ripple transition (item → details) ----
+   20 rings fire in staggered succession, giving a smooth
+   leading wavefront. Nodes are pooled & reused in JS so
+   memory stays bounded; only transform/opacity animate
+   (compositor-friendly). */
+.golden-ring {
   position: fixed;
   z-index: 200;
   width: 120px;
@@ -69,33 +73,24 @@ body.app.is-en { font-family: var(--font-en); }
   margin: -60px 0 0 -60px;
   border-radius: 50%;
   pointer-events: none;
+  opacity: 0;
+  border: 1.5px solid rgba(255, 236, 180, 0.9);
+  box-shadow:
+    0 0 12px rgba(255, 214, 120, 0.6),
+    0 0 28px rgba(255, 200, 90, 0.3),
+    inset 0 0 12px rgba(255, 214, 120, 0.5);
   will-change: transform, opacity;
-  background:
-    radial-gradient(circle,
-      rgba(212, 163, 89, 0)   0%,
-      rgba(212, 163, 89, 0)  58%,
-      rgba(255, 232, 170, 0.45) 65%,
-      rgba(255, 244, 205, 0.80) 71%,
-      rgba(255, 232, 170, 0.28) 78%,
-      rgba(212, 163, 89, 0.07) 85%,
-      rgba(212, 163, 89, 0)  92%),
-    radial-gradient(circle,
-      rgba(212, 163, 89, 0.28) 0%,
-      rgba(212, 163, 89, 0.13) 32%,
-      rgba(212, 163, 89, 0.05) 52%,
-      rgba(212, 163, 89, 0)   70%);
-  animation: goldenBloom 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes goldenBloom {
-  0%   { transform: scale(0);     opacity: 0; }
-  10%  { transform: scale(0.04);  opacity: 0.35; }
-  20%  { transform: scale(0.28);  opacity: 0.7; }
-  34%  { transform: scale(0.70);  opacity: 0.85; }
-  52%  { transform: scale(var(--s, 60)); opacity: 0.9; }
-  68%  { transform: scale(calc(var(--s, 60) * 1.04)); opacity: 0.72; }
-  84%  { transform: scale(calc(var(--s, 60) * 1.06)); opacity: 0.40; }
-  100% { transform: scale(calc(var(--s, 60) * 1.09)); opacity: 0; }
+.golden-ring.animate {
+  animation: ringExpand 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes ringExpand {
+  0%   { transform: scale(0.06); opacity: 0; }
+  8%   { opacity: 0.95; }
+  42%  { opacity: 0.4; }
+  100% { transform: scale(var(--s, 60)); opacity: 0; }
 }
 
 /* ---- Radial reveal: the new page grows in with the ripple ---- */
@@ -107,13 +102,10 @@ body.app.is-en { font-family: var(--font-en); }
 
 @keyframes pageReveal {
   0%   { clip-path: circle(0% at var(--cx) var(--cy)); -webkit-clip-path: circle(0% at var(--cx) var(--cy)); }
-  10%  { clip-path: circle(calc(var(--r) * 0.015) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.015) at var(--cx) var(--cy)); }
-  20%  { clip-path: circle(calc(var(--r) * 0.104) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.104) at var(--cx) var(--cy)); }
-  34%  { clip-path: circle(calc(var(--r) * 0.278) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.278) at var(--cx) var(--cy)); }
-  52%  { clip-path: circle(calc(var(--r) * 0.49) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.49) at var(--cx) var(--cy)); }
-  68%  { clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); }
-  84%  { clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); }
-  100% { clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); }
+  12%  { clip-path: circle(calc(var(--r) * 0.05) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.05) at var(--cx) var(--cy)); }
+  40%  { clip-path: circle(calc(var(--r) * 0.40) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.40) at var(--cx) var(--cy)); }
+  70%  { clip-path: circle(calc(var(--r) * 0.80) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.80) at var(--cx) var(--cy)); }
+  100% { clip-path: circle(calc(var(--r) * 1.02) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 1.02) at var(--cx) var(--cy)); }
 }
 
 .icon { flex-shrink: 0; }
