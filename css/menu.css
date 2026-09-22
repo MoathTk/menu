@@ -259,7 +259,7 @@ body.app.is-en { font-family: var(--font-en); }
    ========================================================================== */
 .screen-home {
   padding: clamp(16px, 4vw, 28px) clamp(14px, 4vw, 32px)
-           calc(96px + env(safe-area-inset-bottom));
+           max(28px, env(safe-area-inset-bottom));
   width: 100%;
   margin: 0 auto;
 }
@@ -549,39 +549,6 @@ body.app.is-en { font-family: var(--font-en); }
 
 .shop-footer-link svg { flex-shrink: 0; }
 
-/* ---- Bottom navigation (floating pill on desktop) ---- */
-.bottom-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 30;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: rgba(30, 27, 24, 0.92);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
-  padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
-}
-
-.bn-item {
-  color: var(--faint);
-  width: 52px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  transition: color 0.15s ease;
-  flex-shrink: 0;
-}
-
-.bn-item.is-active {
-  color: var(--accent);
-  background: var(--accent-soft);
-}
-
 /* ==========================================================================
    Screen 3 — Item Details
    ========================================================================== */
@@ -739,19 +706,6 @@ body.app.is-en { font-family: var(--font-en); }
 }
 
 @media (min-width: 640px) {
-  /* floating pill bottom nav */
-  .bottom-nav {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: min(520px, calc(100% - 32px));
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    bottom: 16px;
-    padding: 10px 14px;
-    box-shadow: var(--shadow);
-  }
-
   /* floating bottom action bar */
   .screen-details { padding-bottom: 16px; }
 

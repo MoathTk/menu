@@ -506,14 +506,6 @@ function init() {
       ? t('read_less', state.lang)
       : t('read_more', state.lang);
   });
-
-  document.querySelectorAll('.bn-item').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      document.querySelectorAll('.bn-item').forEach(function (b) {
-        b.classList.toggle('is-active', b === btn);
-      });
-    });
-  });
 }
 
 function toggleLang() {
