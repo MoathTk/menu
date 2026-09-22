@@ -244,9 +244,14 @@ function openDetails(item, ev) {
   state.details.item = item;
   state.details.expanded = false;
   renderDetails();
+  var cx = ev ? ev.clientX : window.innerWidth / 2;
+  var cy = ev ? ev.clientY : window.innerHeight / 2;
+  var sc = $id('screen-details');
+  sc.style.setProperty('--cx', cx.toFixed(1) + 'px');
+  sc.style.setProperty('--cy', cy.toFixed(1) + 'px');
+  sc.style.setProperty('--r', (Math.hypot(window.innerWidth, window.innerHeight) * 1.15).toFixed(1) + 'px');
   showScreen('details');
-  goldenGlow(ev ? ev.clientX : window.innerWidth / 2,
-            ev ? ev.clientY : window.innerHeight / 2);
+  goldenGlow(cx, cy);
 }
 
 var audioCtx = null;

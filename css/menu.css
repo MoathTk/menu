@@ -98,6 +98,24 @@ body.app.is-en { font-family: var(--font-en); }
   100% { transform: scale(calc(var(--s, 60) * 1.09)); opacity: 0; }
 }
 
+/* ---- Radial reveal: the new page grows in with the ripple ---- */
+#screen-details.screen-enter {
+  animation:
+    screenIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards,
+    pageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes pageReveal {
+  0%   { clip-path: circle(0% at var(--cx) var(--cy)); -webkit-clip-path: circle(0% at var(--cx) var(--cy)); }
+  10%  { clip-path: circle(calc(var(--r) * 0.015) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.015) at var(--cx) var(--cy)); }
+  20%  { clip-path: circle(calc(var(--r) * 0.104) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.104) at var(--cx) var(--cy)); }
+  34%  { clip-path: circle(calc(var(--r) * 0.278) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.278) at var(--cx) var(--cy)); }
+  52%  { clip-path: circle(calc(var(--r) * 0.49) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.49) at var(--cx) var(--cy)); }
+  68%  { clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); }
+  84%  { clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); }
+  100% { clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.88) at var(--cx) var(--cy)); }
+}
+
 .icon { flex-shrink: 0; }
 
 /* ==========================================================================
