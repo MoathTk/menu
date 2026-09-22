@@ -526,7 +526,12 @@ body.app.is-en { font-family: var(--font-en); }
 /* ==========================================================================
    Screen 3 — Item Details
    ========================================================================== */
-.screen-details { padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+.screen-details {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
 
 .details-hero {
   position: relative;
@@ -609,13 +614,14 @@ body.app.is-en { font-family: var(--font-en); }
   margin-inline-start: 4px;
 }
 
-/* ---- bottom price bar ---- */
+/* ---- bottom price bar (sticky, pinned to viewport bottom) ---- */
 .bottom-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
+  position: sticky;
   bottom: 0;
   z-index: 30;
+  width: 100%;
+  margin-top: auto;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -688,10 +694,10 @@ body.app.is-en { font-family: var(--font-en); }
   }
 
   /* floating bottom action bar */
+  .screen-details { padding-bottom: 16px; }
+
   .bottom-bar {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+    align-self: center;
     width: min(860px, calc(100% - 32px));
     border: 1px solid rgba(255, 235, 195, 0.5);
     border-radius: 22px;
