@@ -127,8 +127,7 @@ body.app.is-en { font-family: var(--font-en); }
   width: clamp(210px, 60vw, 400px);
   height: clamp(210px, 60vw, 400px);
   object-fit: cover;
-  border-radius: 50%;
-  border: 6px solid rgba(255, 209, 120, 0.55);
+  border-radius: 100%;
   box-shadow:
     0 0 34px rgba(255, 200, 92, 0.9),
     0 0 90px rgba(255, 190, 70, 0.6),
@@ -243,11 +242,24 @@ body.app.is-en { font-family: var(--font-en); }
 .home-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 14px;
   margin-bottom: 8px;
 }
 
-.home-brand { font-weight: 800; font-size: 1.1rem; }
+.home-logo {
+  width: clamp(42px, 9vw, 54px);
+  height: clamp(42px, 9vw, 54px);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 163, 89, 0.4);
+  box-shadow:
+    0 0 16px rgba(212, 163, 89, 0.5),
+    0 0 40px rgba(212, 163, 89, 0.22);
+  flex-shrink: 0;
+}
+
+.home-brand { font-weight: 800; font-size: clamp(1.1rem, 3.4vw, 1.3rem); }
 
 .home-title {
   font-size: clamp(1.35rem, 4.5vw, 2rem);
@@ -608,17 +620,32 @@ body.app.is-en { font-family: var(--font-en); }
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: rgba(30, 27, 24, 0.94);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, #E3B877 0%, #D4A359 45%, #B9853F 100%);
+  color: #17130E;
+  border-top: 1px solid rgba(255, 235, 195, 0.45);
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 240, 205, 0.4);
   padding: 14px clamp(14px, 4vw, 28px) calc(14px + env(safe-area-inset-bottom));
 }
 
 .price-col { display: flex; flex-direction: column; line-height: 1.3; flex-shrink: 0; }
 
-.price-label { color: var(--muted); font-size: 0.78rem; }
+.price-label {
+  color: rgba(23, 19, 14, 0.72);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
 
-.total-price { font-size: clamp(1.05rem, 3vw, 1.2rem); font-weight: 800; }
+.total-price {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #4A2E0E 0%, #241505 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255, 244, 220, 0.45));
+}
 
 /* ==========================================================================
    Responsive breakpoints
@@ -666,11 +693,11 @@ body.app.is-en { font-family: var(--font-en); }
     right: auto;
     transform: translateX(-50%);
     width: min(860px, calc(100% - 32px));
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255, 235, 195, 0.5);
     border-radius: 22px;
     bottom: 16px;
     padding: 14px 22px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 240, 205, 0.45);
   }
 }
 

@@ -301,7 +301,10 @@ function renderDetails() {
 
   $id('d-roast').textContent = t('roast_medium', state.lang);
 
-  var full = item.desc_ar || t('default_desc', 'ar');
+  var full = state.lang === 'en'
+    ? (item.desc_en || item.desc_ar || '')
+    : (item.desc_ar || item.desc_en || '');
+  full = full || t('default_desc', state.lang);
   $id('d-desc-short').textContent = '';
   $id('d-desc-more').textContent = full;
   $id('d-desc-more').hidden = false;
@@ -331,6 +334,11 @@ function renderHomeChrome() {
     ? pickL10n(state.menu.shop.name_ar, state.menu.shop.name_en, state.lang)
     : t('shop_default_name', state.lang);
   $id('home-brand').textContent = brand;
+  var logo = state.menu && state.menu.shop && state.menu.shop.logo
+    ? state.menu.shop.logo
+    : 'assets/images/logo.png';
+  $id('home-logo').src = logo;
+  $id('home-logo').alt = brand;
   document.title = brand;
 }
 

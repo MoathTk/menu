@@ -2,7 +2,7 @@ var I18N_STRINGS = {
   ar: {
     splash_title: 'اضغط للدخول إلى عالم رواق',
     start_now: 'ادخل',
-    home_title: 'ابحث عن أفضل قهوة لذوقك',
+    home_title: 'ابحث عما تفضله',
     search_placeholder: 'ابحث عن قهوتك...',
     category_all: 'الكل',
     special_for_you: 'مميز لك',
@@ -40,7 +40,7 @@ var I18N_STRINGS = {
   en: {
     splash_title: 'Click to enter Riwaq world',
     start_now: 'Enter',
-    home_title: 'Find the best coffee for your taste',
+    home_title: 'Search for your preferences',
     search_placeholder: 'Search your coffee...',
     category_all: 'All',
     special_for_you: 'Special for you',
