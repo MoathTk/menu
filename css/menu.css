@@ -125,6 +125,8 @@ body.app.is-en { font-family: var(--font-en); }
 .splash-inner {
   max-width: 460px;
   width: 100%;
+  min-height: calc(100vh - 48px);
+  min-height: calc(100dvh - 48px);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -152,6 +154,7 @@ body.app.is-en { font-family: var(--font-en); }
     0 0 34px rgba(255, 200, 92, 0.9),
     0 0 90px rgba(255, 190, 70, 0.6),
     inset 0 0 30px rgba(255, 209, 120, 0.45);
+  margin-top: clamp(8px, 3vh, 28px);
   margin-bottom: clamp(20px, 4vw, 36px);
   animation:
     splashImgIn 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) backwards,
@@ -220,6 +223,8 @@ body.app.is-en { font-family: var(--font-en); }
     0 10px 28px rgba(212, 163, 89, 0.35),
     0 1px 6px rgba(0, 0, 0, 0.35);
   transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.2s ease;
+  margin-top: auto;
+  margin-bottom: max(0px, env(safe-area-inset-bottom));
   animation: btnAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   animation-delay: 3.2s;
 }
