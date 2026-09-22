@@ -276,6 +276,38 @@ function playClick() {
   } catch (e) {}
 }
 
+function playCurtain() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    var ctx = audioCtx;
+    var t = ctx.currentTime;
+    var dur = 0.34;
+    var count = Math.floor(ctx.sampleRate * dur);
+    var buf = ctx.createBuffer(1, count, ctx.sampleRate);
+    var data = buf.getChannelData(0);
+    for (var i = 0; i < count; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.5;
+    }
+    var src = ctx.createBufferSource();
+    src.buffer = buf;
+    var band = ctx.createBiquadFilter();
+    band.type = 'bandpass';
+    band.Q.value = 1.1;
+    band.frequency.setValueAtTime(240, t);
+    band.frequency.exponentialRampToValueAtTime(1900, t + dur);
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(0.14, t + 0.07);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(band);
+    band.connect(gain);
+    gain.connect(ctx.destination);
+    src.start(t);
+    src.stop(t + dur);
+  } catch (e) {}
+}
+
 var glowRingPool = [];
 var GLOW_RING_COUNT = 20;
 var GLOW_RING_DURATION = 250;
@@ -410,7 +442,9 @@ function init() {
   applyLang(state.lang);
 
   document.addEventListener('click', function (e) {
-    if (e.target.closest('button, .item-card, .featured-card')) playClick();
+    if (!e.target.closest('button, .item-card, .featured-card')) return;
+    if (e.target.closest('.cat-tab')) playCurtain();
+    else playClick();
   }, true);
 
   loadMenu(function (menu) {
