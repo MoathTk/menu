@@ -220,21 +220,26 @@ function renderLists() {
 }
 
 function renderFeatured() {
-  var cats = sortedCategories();
   var items = filteredItems();
-  if (state.activeCat === 'all') {
-    items = state.menu.items;
+  var box = $id('featured-card');
+  var section = box.closest('.featured-section');
+
+  if (!items.length) {
+    box.innerHTML = '';
+    box.onclick = null;
+    if (section) section.hidden = true;
+    return;
   }
+  if (section) section.hidden = false;
+
   var feats = items.filter(function (i) { return i.image; });
-  var item = feats[0] || state.menu.items[0];
-  if (!item) return;
+  var item = feats[0] || items[0];
 
   var catById = {};
   state.menu.categories.forEach(function (c) { catById[c.id] = c; });
 
-  var box = $id('featured-card');
   box.innerHTML = '';
-  box.addEventListener('click', function (e) { openDetails(item, e); });
+  box.onclick = function (e) { openDetails(item, e); };
 
   var media = document.createElement('div');
   media.className = 'featured-media';
