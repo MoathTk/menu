@@ -342,8 +342,6 @@ function renderDetails() {
   $id('d-name').textContent = name;
   $id('d-sub').textContent = pickL10n(cat.name_ar, cat.name_en, state.lang);
 
-  $id('d-roast').textContent = t('roast_medium', state.lang);
-
   var full = state.lang === 'en'
     ? (item.desc_en || item.desc_ar || '')
     : (item.desc_ar || item.desc_en || '');

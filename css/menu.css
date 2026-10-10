@@ -580,25 +580,12 @@ body.app.is-en { font-family: var(--font-en); }
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
-  flex-wrap: wrap;              /* allow roast-chip to wrap on tiny screens */
+  flex-wrap: wrap;
 }
 
 .details-name { font-size: clamp(1.35rem, 4.5vw, 1.8rem); font-weight: 800; margin: 0 0 4px; }
 
 .details-sub { color: var(--muted); margin: 0 0 10px; font-size: 0.9rem; }
-
-.roast-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--surface-2);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
 
 /* ---- sections ---- */
 .details-block { margin-top: clamp(20px, 4vw, 30px); }
