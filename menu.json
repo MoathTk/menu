@@ -600,18 +600,6 @@
       "image": "assets/images/hot-9.jpg"
     },
     {
-      "id": "mo01",
-      "category_id": "mojito",
-      "sort": 45,
-      "tags": [],
-      "name_ar": "موهيتو ريد",
-      "name_en": "Red Mojito",
-      "desc_ar": "موهيتو أحمر منعش بشراب التوت والليمون والنعناع والثلج المجروش.",
-      "desc_en": "Refreshing red mojito with berry syrup, lime, mint and crushed ice.",
-      "price": 3500,
-      "image": "assets/images/mojito-1.jpg"
-    },
-    {
       "id": "mo02",
       "category_id": "mojito",
       "sort": 46,

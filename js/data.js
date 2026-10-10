@@ -81,7 +81,6 @@ var DEFAULT_MENU = {
     { id: 'h09', cat: 'hot', n: 'امريكانو', e: 'Americano', p: 3000, img: 'hot-9.jpg', da: 'إسبريسو مضاف إليه ماء ساخن، أخف وأصفى وأكثر انعاشاً.', de: 'Espresso topped with hot water; lighter, cleaner and more refreshing.' },
 
     // موهيتو
-    { id: 'mo01', cat: 'mojito', n: 'موهيتو ريد', e: 'Red Mojito', p: 3500, img: 'mojito-1.jpg', da: 'موهيتو أحمر منعش بشراب التوت والليمون والنعناع والثلج المجروش.', de: 'Refreshing red mojito with berry syrup, lime, mint and crushed ice.' },
     { id: 'mo02', cat: 'mojito', n: 'موهيتو بلو', e: 'Blue Mojito', p: 3500, img: 'mojito-2.jpg', da: 'موهيتو أزرق ملوّن منعش، مميز بنكهته ومظهره.', de: 'A striking blue mojito; refreshing with a unique look and taste.' },
     { id: 'mo03', cat: 'mojito', n: 'موهيتو فراولة', e: 'Strawberry Mojito', p: 3500, img: 'mojito-3.jpg', da: 'موهيتو بالفراولة الطازجة والنعناع، حلو وحامض في الوقت نفسه.', de: 'Mojito with fresh strawberries and mint, in a balanced sweet-tart mix.' },
     { id: 'mo04', cat: 'mojito', n: 'موهيتو ركي ونعناع', e: 'Raki Mint Mojito', p: 3500, img: 'mojito-4.jpg', da: 'موهيتو بنكهة الركي مع النعناع المنعش، قوي وخفيف.', de: 'Mojito with raki flavor and fresh mint; bold yet light.' },

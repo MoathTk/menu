@@ -17,7 +17,10 @@
   <!-- ============ Screen 1: Welcome / Splash ============ -->
   <section id="screen-splash" class="screen screen-splash">
     <div class="splash-inner">
-      <button id="splash-lang" class="splash-lang" type="button">EN</button>
+      <div class="splash-top">
+        <button id="splash-lang" class="splash-lang" type="button">EN</button>
+        <button id="splash-theme" class="theme-toggle" type="button" aria-label=""></button>
+      </div>
       <img id="splash-img" class="splash-img" src="assets/images/riwaq.jpg" alt="">
       <h1 id="splash-title" class="splash-title"></h1>
       <button id="start-btn" class="splash-btn" type="button">
@@ -32,6 +35,7 @@
     <header class="home-header">
       <img id="home-logo" class="home-logo" src="assets/images/logo.png" alt="">
       <span id="home-brand" class="home-brand">مقهى رواق</span>
+      <button id="home-theme" class="theme-toggle theme-toggle-home" type="button" aria-label=""></button>
     </header>
 
     <h1 id="home-title" class="home-title">ابحث عن أفضل قهوة لذوقك</h1>
@@ -109,6 +113,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/i18n.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/app.js"></script>
 </body>

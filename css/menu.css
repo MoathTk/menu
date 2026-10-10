@@ -23,6 +23,22 @@
   --font-en: 'Inter', 'Segoe UI', Tahoma, sans-serif;
 }
 
+/* ---- Light theme (opt-in via body.theme-light) ---- */
+body.app.theme-light {
+  --bg: #f5f1ea;
+  --surface: #ffffff;
+  --surface-2: #efe9df;
+  --surface-3: #e5dccf;
+  --accent: #b9853f;
+  --accent-soft: rgba(185, 133, 63, 0.16);
+  --text: #2b2620;
+  --muted: #7c7468;
+  --faint: #a99f90;
+  --border: #e4dbcd;
+  --danger: #b3422e;
+  --shadow: 0 8px 24px rgba(74, 52, 38, 0.14);
+}
+
 body.app {
   font-family: var(--font-ar);
   background: var(--bg);
@@ -133,9 +149,15 @@ body.app.is-en { font-family: var(--font-en); }
   align-items: center;
 }
 
-.splash-lang {
-  align-self: flex-start;
+.splash-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 22px;
+}
+
+.splash-lang {
   background: var(--surface-2);
   color: var(--muted);
   border-radius: 999px;
@@ -144,6 +166,29 @@ body.app.is-en { font-family: var(--font-en); }
 }
 
 .splash-lang:hover { color: var(--text); }
+
+/* ---- Theme toggle ---- */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+
+.theme-toggle:hover { color: var(--text); background: var(--accent-soft); }
+
+.theme-toggle:active { transform: scale(0.95); }
+
+.theme-toggle svg { display: block; }
+
+.theme-toggle-home { margin-inline-start: auto; }
 
 .splash-img {
   width: clamp(210px, 60vw, 400px);
@@ -747,4 +792,29 @@ body.app.is-en { font-family: var(--font-en); }
   .item-card { width: 140px; }
   .item-media { height: 132px; }
   .home-title { font-size: 1.2rem; }
+}
+
+/* ==========================================================================
+   Light theme — component overrides
+   (tokens are swapped on body.theme-light; these fix hardcoded dark fills)
+   ========================================================================== */
+body.app.theme-light .item-media,
+body.app.theme-light .featured-media {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(185, 133, 63, 0.18), transparent 72%),
+    linear-gradient(160deg, #f3ecdf, #e7dccb);
+}
+
+body.app.theme-light .item-media-ph { color: rgba(185, 133, 63, 0.9); }
+
+body.app.theme-light .home-logo {
+  border-color: rgba(185, 133, 63, 0.5);
+  box-shadow:
+    0 0 14px rgba(185, 133, 63, 0.35),
+    0 0 34px rgba(185, 133, 63, 0.15);
+}
+
+body.app.theme-light .circle-btn {
+  background: rgba(255, 255, 255, 0.72);
+  color: #2b2620;
 }

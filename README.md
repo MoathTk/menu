@@ -10,6 +10,7 @@ admin.html          Shop editor (PIN-locked)
 menu.json           Published menu data — customers fetch this
 js/data.js          DEFAULT_MENU fallback snapshot + admin PIN
 js/i18n.js          AR/EN strings + RTL/LTR handling
+js/theme.js         Dark/light theme preference (localStorage)
 js/storage.js       Load/save menu, export blob helper
 js/app.js           Customer page logic
 js/admin.js         Admin page logic
@@ -46,6 +47,7 @@ Import/export and "restore defaults" live in the same panel.
 
 ## Notes
 
+- The customer menu ships with a premium dark theme and an opt-in light theme. Toggle it with the sun/moon button on the splash and home screens; the choice is saved per browser (`menu.theme`).
 - The admin editor is stored in the browser's localStorage, so it only edits on the device you use. The published `menu.json` file is the single source of truth customers see.
 - Photo URLs can be absolute links or relative file paths under `assets/images/`.
 - The customer page fetches `menu.json` at runtime and falls back to the bundled `DEFAULT_MENU` snapshot when offline or when hosted somewhere that forbids relative fetch.

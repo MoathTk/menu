@@ -35,6 +35,8 @@ var I18N_STRINGS = {
     contact_whatsapp: 'واتساب',
     contact_instagram: 'انستغرام',
     follow_us: 'تابعنا',
+    theme_switch_light: 'تبديل إلى الوضع الفاتح',
+    theme_switch_dark: 'تبديل إلى الوضع الداكن',
     shop_default_name: 'مقهى رواق'
   },
   en: {
@@ -73,6 +75,8 @@ var I18N_STRINGS = {
     contact_whatsapp: 'WhatsApp',
     contact_instagram: 'Instagram',
     follow_us: 'Follow us',
+    theme_switch_light: 'Switch to light mode',
+    theme_switch_dark: 'Switch to dark mode',
     shop_default_name: 'RIWAQ CAFÉ'
   }
 };
