@@ -131,7 +131,7 @@ function filteredItems() {
 function buildCard(item) {
   var card = document.createElement('article');
   card.className = 'item-card';
-  card.addEventListener('click', function (e) { openDetails(item, e); });
+  card.addEventListener('click', function () { openDetails(item); });
 
   var media = document.createElement('div');
   media.className = 'item-media';
@@ -170,7 +170,7 @@ function buildCard(item) {
   add.className = 'add-btn';
   add.setAttribute('aria-label', '+');
   add.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
-  add.addEventListener('click', function (e) { e.stopPropagation(); openDetails(item, e); });
+  add.addEventListener('click', function (e) { e.stopPropagation(); openDetails(item); });
   foot.appendChild(price);
   foot.appendChild(add);
 
@@ -239,7 +239,7 @@ function renderFeatured() {
   state.menu.categories.forEach(function (c) { catById[c.id] = c; });
 
   box.innerHTML = '';
-  box.onclick = function (e) { openDetails(item, e); };
+  box.onclick = function () { openDetails(item); };
 
   var media = document.createElement('div');
   media.className = 'featured-media';
@@ -266,18 +266,11 @@ function renderFeatured() {
 /* ---------------------------------------------------------------------------
    Details screen
 ---------------------------------------------------------------------------- */
-function openDetails(item, ev) {
+function openDetails(item) {
   state.details.item = item;
   state.details.expanded = false;
   renderDetails();
-  var cx = ev ? ev.clientX : window.innerWidth / 2;
-  var cy = ev ? ev.clientY : window.innerHeight / 2;
-  var sc = $id('screen-details');
-  sc.style.setProperty('--cx', cx.toFixed(1) + 'px');
-  sc.style.setProperty('--cy', cy.toFixed(1) + 'px');
-  sc.style.setProperty('--r', (Math.hypot(window.innerWidth, window.innerHeight) * 1.15).toFixed(1) + 'px');
   showScreen('details');
-  goldenGlow(cx, cy);
 }
 
 var audioCtx = null;
@@ -332,43 +325,6 @@ function playCurtain() {
     src.start(t);
     src.stop(t + dur);
   } catch (e) {}
-}
-
-var glowRingPool = [];
-var GLOW_RING_COUNT = 20;
-var GLOW_RING_DURATION = 250;
-
-function createGlowRing() {
-  var el = document.createElement('div');
-  el.className = 'golden-ring';
-  el.addEventListener('animationend', function () {
-    el.classList.remove('animate');
-    el.removeAttribute('style');
-    document.body.removeChild(el);
-    glowRingPool.push(el);
-  });
-  return el;
-}
-
-function acquireGlowRing() {
-  return glowRingPool.length ? glowRingPool.pop() : createGlowRing();
-}
-
-function goldenGlow(x, y) {
-  var s = Math.hypot(window.innerWidth, window.innerHeight) * 1.35 / 120;
-  var step = GLOW_RING_DURATION / GLOW_RING_COUNT;
-  for (var i = 0; i < GLOW_RING_COUNT; i++) {
-    var el = acquireGlowRing();
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.setProperty('--s', s.toFixed(1));
-    el.style.animationDuration = GLOW_RING_DURATION + 'ms';
-    el.style.animationDelay = Math.round(step * i) + 'ms';
-    document.body.appendChild(el);
-    el.classList.remove('animate');
-    void el.getBoundingClientRect();
-    el.classList.add('animate');
-  }
 }
 
 function renderDetails() {
@@ -508,9 +464,8 @@ function init() {
   $id('splash-theme').addEventListener('click', switchTheme);
   $id('home-theme').addEventListener('click', switchTheme);
 
-  $id('start-btn').addEventListener('click', function (e) {
+  $id('start-btn').addEventListener('click', function () {
     showScreen('home');
-    goldenGlow(e.clientX, e.clientY);
   });
 
   $id('search-input').addEventListener('input', function (e) {

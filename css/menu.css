@@ -76,54 +76,6 @@ body.app.is-en { font-family: var(--font-en); }
   to { opacity: 0; transform: scale(1.05); filter: blur(8px); }
 }
 
-/* ---- Golden ripple transition (item → details) ----
-   20 rings fire in staggered succession, giving a smooth
-   leading wavefront. Nodes are pooled & reused in JS so
-   memory stays bounded; only transform/opacity animate
-   (compositor-friendly). */
-.golden-ring {
-  position: fixed;
-  z-index: 200;
-  width: 120px;
-  height: 120px;
-  margin: -60px 0 0 -60px;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  border: 1.5px solid rgba(255, 236, 180, 0.9);
-  box-shadow:
-    0 0 12px rgba(255, 214, 120, 0.6),
-    0 0 28px rgba(255, 200, 90, 0.3),
-    inset 0 0 12px rgba(255, 214, 120, 0.5);
-  will-change: transform, opacity;
-}
-
-.golden-ring.animate {
-  animation: ringExpand 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes ringExpand {
-  0%   { transform: scale(0.06); opacity: 0; }
-  8%   { opacity: 0.95; }
-  42%  { opacity: 0.4; }
-  100% { transform: scale(var(--s, 60)); opacity: 0; }
-}
-
-/* ---- Radial reveal: the new page grows in with the ripple ---- */
-#screen-details.screen-enter {
-  animation:
-    screenIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards,
-    pageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-
-@keyframes pageReveal {
-  0%   { clip-path: circle(0% at var(--cx) var(--cy)); -webkit-clip-path: circle(0% at var(--cx) var(--cy)); }
-  12%  { clip-path: circle(calc(var(--r) * 0.05) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.05) at var(--cx) var(--cy)); }
-  40%  { clip-path: circle(calc(var(--r) * 0.40) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.40) at var(--cx) var(--cy)); }
-  70%  { clip-path: circle(calc(var(--r) * 0.80) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 0.80) at var(--cx) var(--cy)); }
-  100% { clip-path: circle(calc(var(--r) * 1.02) at var(--cx) var(--cy)); -webkit-clip-path: circle(calc(var(--r) * 1.02) at var(--cx) var(--cy)); }
-}
-
 .icon { flex-shrink: 0; }
 
 /* ==========================================================================
