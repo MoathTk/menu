@@ -145,18 +145,15 @@ body.app.is-en { font-family: var(--font-en); }
 .splash-img {
   width: clamp(210px, 60vw, 400px);
   height: clamp(210px, 60vw, 400px);
-  object-fit: cover;
-  border-radius: 100%;
-  box-shadow:
-    0 0 34px rgba(255, 200, 92, 0.9),
-    0 0 90px rgba(255, 190, 70, 0.6),
-    inset 0 0 30px rgba(255, 209, 120, 0.45);
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 22px rgba(255, 200, 92, 0.85))
+    drop-shadow(0 0 55px rgba(255, 190, 70, 0.45));
   margin-top: clamp(8px, 3vh, 28px);
   margin-bottom: clamp(20px, 4vw, 36px);
   animation:
     splashImgIn 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) backwards,
-    splashRotate 1s cubic-bezier(0.4, 0, 0.2, 1) 0.7s backwards,
-    glowPulse 3s ease-in-out 1.7s infinite;
+    splashRotate 1s cubic-bezier(0.4, 0, 0.2, 1) 0.7s backwards;
 }
 
 @keyframes splashImgIn {
@@ -166,21 +163,6 @@ body.app.is-en { font-family: var(--font-en); }
 
 @keyframes splashRotate {
   to { transform: rotate(360deg); }
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow:
-      0 0 34px rgba(255, 200, 92, 0.9),
-      0 0 90px rgba(255, 190, 70, 0.6),
-      inset 0 0 30px rgba(255, 209, 120, 0.45);
-  }
-  50% {
-    box-shadow:
-      0 0 60px rgba(255, 214, 110, 1),
-      0 0 140px rgba(255, 200, 80, 0.85),
-      inset 0 0 44px rgba(255, 219, 130, 0.65);
-  }
 }
 
 .splash-title {
@@ -272,12 +254,10 @@ body.app.is-en { font-family: var(--font-en); }
 .home-logo {
   width: clamp(42px, 9vw, 54px);
   height: clamp(42px, 9vw, 54px);
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid rgba(212, 163, 89, 0.4);
-  box-shadow:
-    0 0 16px rgba(212, 163, 89, 0.5),
-    0 0 40px rgba(212, 163, 89, 0.22);
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 5px rgba(212, 163, 89, 0.55))
+    drop-shadow(0 0 12px rgba(212, 163, 89, 0.25));
   flex-shrink: 0;
 }
 
@@ -760,10 +740,9 @@ body.app.theme-light .featured-media {
 body.app.theme-light .item-media-ph { color: rgba(185, 133, 63, 0.9); }
 
 body.app.theme-light .home-logo {
-  border-color: rgba(185, 133, 63, 0.5);
-  box-shadow:
-    0 0 14px rgba(185, 133, 63, 0.35),
-    0 0 34px rgba(185, 133, 63, 0.15);
+  filter:
+    drop-shadow(0 0 5px rgba(185, 133, 63, 0.45))
+    drop-shadow(0 0 12px rgba(185, 133, 63, 0.2));
 }
 
 body.app.theme-light .circle-btn {
