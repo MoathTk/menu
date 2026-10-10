@@ -110,7 +110,6 @@ function renderTabs() {
       state.activeCat = b.dataset.id;
       renderTabs();
       renderLists();
-      renderFeatured();
     });
   });
 }
@@ -217,50 +216,6 @@ function renderLists() {
     group.appendChild(row);
     wrap.appendChild(group);
   });
-}
-
-function renderFeatured() {
-  var items = filteredItems();
-  var box = $id('featured-card');
-  var section = box.closest('.featured-section');
-
-  if (!items.length) {
-    box.innerHTML = '';
-    box.onclick = null;
-    if (section) section.hidden = true;
-    return;
-  }
-  if (section) section.hidden = false;
-
-  var feats = items.filter(function (i) { return i.image; });
-  var item = feats[0] || items[0];
-
-  var catById = {};
-  state.menu.categories.forEach(function (c) { catById[c.id] = c; });
-
-  box.innerHTML = '';
-  box.onclick = function () { openDetails(item); };
-
-  var media = document.createElement('div');
-  media.className = 'featured-media';
-  var img = document.createElement('img');
-  img.src = item.image || (state.menu.shop.logo || '');
-  img.alt = pickL10n(item.name_ar, item.name_en, state.lang);
-  media.appendChild(img);
-
-  var body = document.createElement('div');
-  body.className = 'featured-body';
-  body.innerHTML =
-    '<h3 class="featured-name">' + pickL10n(item.name_ar, item.name_en, state.lang) + '</h3>' +
-    '<p class="featured-sub">' + pickL10n((catById[item.category_id] || {}).name_ar || '', (catById[item.category_id] || {}).name_en || '', state.lang) + '</p>' +
-    '<div class="featured-foot">' +
-    '<span class="featured-price">' + formatPrice(item.price) + ' ' + currencySymbol(state.menu.shop, state.lang) + '</span>' +
-    '</div>';
-
-  box.appendChild(media);
-  box.appendChild(body);
-
-  $id('featured-title').textContent = t('special_for_you', state.lang);
 }
 
 /* ---------------------------------------------------------------------------
@@ -435,7 +390,6 @@ function renderAll() {
   if (!state.menu) return;
   renderTabs();
   renderLists();
-  renderFeatured();
   if (state.details.item) renderDetails();
 }
 
@@ -447,7 +401,7 @@ function init() {
   applyTheme(getTheme());
 
   document.addEventListener('click', function (e) {
-    if (!e.target.closest('button, .item-card, .featured-card')) return;
+    if (!e.target.closest('button, .item-card')) return;
     if (e.target.closest('.cat-tab')) playCurtain();
     else playClick();
   }, true);
@@ -470,7 +424,6 @@ function init() {
     state.query = e.target.value;
     renderTabs();
     renderLists();
-    renderFeatured();
   });
 
   $id('filter-btn').addEventListener('click', function () {
