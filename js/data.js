@@ -70,14 +70,16 @@ var DEFAULT_MENU = {
     { id: 'j09', cat: 'juice', n: 'عصير برتقال وليمون', e: 'Orange Lemon Juice', p: 3500, img: 'juice-9.jpg', da: 'برتقال وليمون معاً، توازن ممتاز بين الحلاوة والحموضة.', de: 'Orange and lemon combined for the perfect balance of sweet and tangy.' },
 
     // القهوة الساخنة
-    { id: 'h01', cat: 'hot', n: 'نسكافيه', e: 'Nescafe', p: 2000, img: 'hot-1.jpg', da: 'نسكافيه ساخن محضّر بعناية مع الحليب، سريع ولذيذ.', de: 'Hot Nescafe prepared with care and milk; quick and tasty.' },
+    { id: 'h01', cat: 'hot', n: 'نسكافيه', e: 'Nescafe', p: 2500, img: 'hot-1.jpg', da: 'نسكافيه ساخن محضّر بعناية مع الحليب، سريع ولذيذ.', de: 'Hot Nescafe prepared with care and milk; quick and tasty.' },
     { id: 'h02', cat: 'hot', n: 'هوت تشوكليت', e: 'Hot Chocolate', p: 3500, img: 'hot-2.jpg', da: 'شوكولاتة ساخنة غنية بالحليب وتُتوّج بالكريمة، دافئة ومريحة.', de: 'Rich hot chocolate made with milk and topped with cream; warm and cozy.' },
     { id: 'h03', cat: 'hot', n: 'فلات وايت', e: 'Flat White', p: 3500, img: 'hot-3.jpg', da: 'شوت مزدوج من الإسبريسو مع حليب مبخّر قليل الرغوة، توازن قهوة ناعم.', de: 'Double espresso with velvety steamed milk; a smooth coffee balance.' },
     { id: 'h04', cat: 'hot', n: 'لاتيه', e: 'Latte', p: 3500, img: 'hot-4.jpg', da: 'لاتيه كلاسيكي بحليب مبخّر ورغوة ناعمة، ناعم ولطيف.', de: 'Classic latte with steamed milk and soft foam; gentle and smooth.' },
     { id: 'h05', cat: 'hot', n: 'دارك موكا', e: 'Dark Mocha', p: 4000, img: 'hot-5.jpg', da: 'موكا بالشوكولاتة الداكنة والإسبريسو مع حليب مبخّر، غني وفاخر.', de: 'Mocha with dark chocolate, espresso and steamed milk; rich and indulgent.' },
     { id: 'h06', cat: 'hot', n: 'قهوة تركية', e: 'Turkish Coffee', p: 2500, img: 'hot-6.jpg', da: 'قهوة تركية أصيلة مع رغوة، مطبوخة على الحرارة بعناية.', de: 'Authentic Turkish coffee with foam, slow-cooked to perfection.' },
-    { id: 'h07', cat: 'hot', n: 'كابتشينو', e: 'Cappuccino', p: 1500, img: 'hot-7.jpg', da: 'كابتشينو برغوة حليب كثيفة، كلاسيكي متوازن ومحبوب.', de: 'Cappuccino with thick milk foam; a balanced, beloved classic.' },
+    { id: 'h07', cat: 'hot', n: 'كابتشينو', e: 'Cappuccino', p: 3500, img: 'hot-7.jpg', da: 'كابتشينو برغوة حليب كثيفة، كلاسيكي متوازن ومحبوب.', de: 'Cappuccino with thick milk foam; a balanced, beloved classic.' },
     { id: 'h08', cat: 'hot', n: 'اسبريسو', e: 'Espresso', p: 2500, img: 'hot-8.jpg', da: 'شوت إسبريسو مركّز، طاقتك القهوة الأصيلة بنكهة كاملة.', de: 'A concentrated espresso shot; pure coffee energy with full flavor.' },
+    { id: 'h10', cat: 'hot', n: 'اسبريسو سنكل شوت', e: 'Espresso Single Shot', p: 2500, img: 'hot-8.jpg', da: 'شوت إسبريسو واحد مركّز، نكهة قهوة أصيلة وقوية في جرعة صغيرة.', de: 'A single concentrated espresso shot; pure, bold coffee flavor in a small dose.' },
+    { id: 'h11', cat: 'hot', n: 'اسبريسو دبل شوت', e: 'Espresso Double Shot', p: 3500, img: 'hot-8.jpg', da: 'شوتان من الإسبريسو المركّز، طاقة أكبر ونكهة أغنى لعشاق القهوة.', de: 'A double concentrated espresso shot; more energy and a richer flavor.' },
     { id: 'h09', cat: 'hot', n: 'امريكانو', e: 'Americano', p: 3000, img: 'hot-9.jpg', da: 'إسبريسو مضاف إليه ماء ساخن، أخف وأصفى وأكثر انعاشاً.', de: 'Espresso topped with hot water; lighter, cleaner and more refreshing.' },
 
     // موهيتو
@@ -100,23 +102,23 @@ var DEFAULT_MENU = {
     { id: 'd08', cat: 'drinks', n: 'ماء', e: 'Water', p: 500, img: 'drinks-7.jpg', da: 'ماء معبأ، نظيف ومنعش.', de: 'Bottled water; clean and refreshing.' },
 
     // النراكيل البابلي
-    { id: 'hb01', cat: 'hookah_bably', n: 'نركيلة رواق طبيعي', e: 'Riwaq Natural Hookah', p: 15000, img: '', da: 'نركيلة رواق الطبيعية بخليط رواق الخاص وتجربة رواق الكاملة.', de: 'Riwaq Signature Natural Hookah with our exclusive blend and the full Riwaq experience.' },
-    { id: 'hb02', cat: 'hookah_bably', n: 'نركيلة رواق بابلي', e: 'Riwaq Bably Hookah', p: 7000, img: '', da: 'نركيلة بابلي بنكهة رواق المميزة، دخنة وغنية.', de: 'Bably hookah with Riwaq\u2019s signature flavor; smooth and rich.' },
-    { id: 'hb03', cat: 'hookah_bably', n: 'نركيلة باونتي بابلي', e: 'Bounty Bably Hookah', p: 6000, img: '', da: 'نركيلة بابلي بنكهة باونتي بجوز الهند والشوكولاتة.', de: 'Bably hookah with a chocolate-coconut Bounty treat.' },
-    { id: 'hb04', cat: 'hookah_bably', n: 'نركيلة عنب بابلي', e: 'Grape Bably Hookah', p: 6000, img: '', da: 'نركيلة بابلي بعنب مدخّن غني النكهة.', de: 'Bably hookah with a rich, smoky grape flavor.' },
-    { id: 'hb05', cat: 'hookah_bably', n: 'نركيلة نعناع بابلي', e: 'Mint Bably Hookah', p: 6000, img: '', da: 'نركيلة بابلي بنعناع منعش وبارد.', de: 'Bably hookah with a cool, refreshing mint.' },
-    { id: 'hb06', cat: 'hookah_bably', n: 'نركيلة علج ونعناع بابلي', e: 'Gum & Mint Bably Hookah', p: 6000, img: '', da: 'نركيلة بابلي بمزيج العلج والنعناع الكلاسيكي.', de: 'Bably hookah with the classic gum and mint mix.' },
-    { id: 'hb07', cat: 'hookah_bably', n: 'نركيلة انكليزي بابلي', e: 'English Bably Hookah', p: 6000, img: '', da: 'نركيلة بابلي بنكهة الفواكه الإنجليزية الكلاسيكية.', de: 'Bably hookah with the classic English fruity flavor.' },
-    { id: 'hb08', cat: 'hookah_bably', n: 'نركيلة ليمون ونعناع بابلي', e: 'Lemon & Mint Bably Hookah', p: 6000, img: '', da: 'نركيلة بابلي بالليمون والنعناع، طازجة ومنتعشة.', de: 'Bably hookah with lemon and mint; fresh and zesty.' },
+    { id: 'hb01', cat: 'hookah_bably', n: 'نركيلة رواق طبيعي', e: 'Riwaq Natural Hookah', p: 15000, img: 'hookah.jpg', da: 'نركيلة رواق الطبيعية بخليط رواق الخاص وتجربة رواق الكاملة.', de: 'Riwaq Signature Natural Hookah with our exclusive blend and the full Riwaq experience.' },
+    { id: 'hb02', cat: 'hookah_bably', n: 'نركيلة رواق بابلي', e: 'Riwaq Bably Hookah', p: 7000, img: 'hookah.jpg', da: 'نركيلة بابلي بنكهة رواق المميزة، دخنة وغنية.', de: 'Bably hookah with Riwaq\u2019s signature flavor; smooth and rich.' },
+    { id: 'hb03', cat: 'hookah_bably', n: 'نركيلة باونتي بابلي', e: 'Bounty Bably Hookah', p: 6000, img: 'hookah.jpg', da: 'نركيلة بابلي بنكهة باونتي بجوز الهند والشوكولاتة.', de: 'Bably hookah with a chocolate-coconut Bounty treat.' },
+    { id: 'hb04', cat: 'hookah_bably', n: 'نركيلة عنب بابلي', e: 'Grape Bably Hookah', p: 6000, img: 'hookah.jpg', da: 'نركيلة بابلي بعنب مدخّن غني النكهة.', de: 'Bably hookah with a rich, smoky grape flavor.' },
+    { id: 'hb05', cat: 'hookah_bably', n: 'نركيلة نعناع بابلي', e: 'Mint Bably Hookah', p: 6000, img: 'hookah.jpg', da: 'نركيلة بابلي بنعناع منعش وبارد.', de: 'Bably hookah with a cool, refreshing mint.' },
+    { id: 'hb06', cat: 'hookah_bably', n: 'نركيلة علج ونعناع بابلي', e: 'Gum & Mint Bably Hookah', p: 6000, img: 'hookah.jpg', da: 'نركيلة بابلي بمزيج العلج والنعناع الكلاسيكي.', de: 'Bably hookah with the classic gum and mint mix.' },
+    { id: 'hb07', cat: 'hookah_bably', n: 'نركيلة انكليزي بابلي', e: 'English Bably Hookah', p: 6000, img: 'hookah.jpg', da: 'نركيلة بابلي بنكهة الفواكه الإنجليزية الكلاسيكية.', de: 'Bably hookah with the classic English fruity flavor.' },
+    { id: 'hb08', cat: 'hookah_bably', n: 'نركيلة ليمون ونعناع بابلي', e: 'Lemon & Mint Bably Hookah', p: 6000, img: 'hookah.jpg', da: 'نركيلة بابلي بالليمون والنعناع، طازجة ومنتعشة.', de: 'Bably hookah with lemon and mint; fresh and zesty.' },
 
     // النراكيل الخشب
-    { id: 'hw01', cat: 'hookah_wood', n: 'نركيلة ليمون ونعناع', e: 'Lemon & Mint Hookah', p: 4000, img: '', da: 'نركيلة خشب بالليمون والنعناع، منعشة وكلاسيكية.', de: 'Wood hookah with lemon and mint; refreshing and classic.' },
-    { id: 'hw02', cat: 'hookah_wood', n: 'نركيلة امسية موسكو', e: 'Moscow Evening Hookah', p: 4000, img: '', da: 'نركيلة خشب بطابع مساء موسكو، نكهة مميزة ودخنة ناعمة.', de: 'Wood hookah with a Moscow-evening mood, distinctive flavor and smooth smoke.' },
-    { id: 'hw03', cat: 'hookah_wood', n: 'نركيلة انكليزي', e: 'English Hookah', p: 4000, img: '', da: 'نركيلة خشب بنكهة إنجليزية كلاسيكية.', de: 'Wood hookah with an English-style classic flavor.' },
-    { id: 'hw04', cat: 'hookah_wood', n: 'نركيلة علج ونعناع', e: 'Gum & Mint Hookah', p: 4000, img: '', da: 'نركيلة خشب بمزيج العلج والنعناع المتوازن.', de: 'Wood hookah with a balanced gum and mint mix.' },
-    { id: 'hw05', cat: 'hookah_wood', n: 'نركيلة نعناع', e: 'Mint Hookah', p: 4000, img: '', da: 'نركيلة خشب بالنعناع، نقية ومنعشة.', de: 'Wood hookah with pure, fresh mint.' },
-    { id: 'hw06', cat: 'hookah_wood', n: 'نركيلة تفاحة', e: 'Apple Hookah', p: 4000, img: '', da: 'نركيلة خشب بنكهة التفاح الحلو المميزة.', de: 'Wood hookah with sweet, signature apple flavor.' },
-    { id: 'hw07', cat: 'hookah_wood', n: 'نركيلة تفاحتين', e: 'Double Apple Hookah', p: 4000, img: '', da: 'نركيلة خشب بالتفاحتين، الأقوى والأغنى نكهة.', de: 'Wood hookah with double apple; bolder and richer.' }
+    { id: 'hw01', cat: 'hookah_wood', n: 'نركيلة ليمون ونعناع', e: 'Lemon & Mint Hookah', p: 4000, img: 'hookah.jpg', da: 'نركيلة خشب بالليمون والنعناع، منعشة وكلاسيكية.', de: 'Wood hookah with lemon and mint; refreshing and classic.' },
+    { id: 'hw02', cat: 'hookah_wood', n: 'نركيلة امسية موسكو', e: 'Moscow Evening Hookah', p: 4000, img: 'hookah.jpg', da: 'نركيلة خشب بطابع مساء موسكو، نكهة مميزة ودخنة ناعمة.', de: 'Wood hookah with a Moscow-evening mood, distinctive flavor and smooth smoke.' },
+    { id: 'hw03', cat: 'hookah_wood', n: 'نركيلة انكليزي', e: 'English Hookah', p: 4000, img: 'hookah.jpg', da: 'نركيلة خشب بنكهة إنجليزية كلاسيكية.', de: 'Wood hookah with an English-style classic flavor.' },
+    { id: 'hw04', cat: 'hookah_wood', n: 'نركيلة علج ونعناع', e: 'Gum & Mint Hookah', p: 4000, img: 'hookah.jpg', da: 'نركيلة خشب بمزيج العلج والنعناع المتوازن.', de: 'Wood hookah with a balanced gum and mint mix.' },
+    { id: 'hw05', cat: 'hookah_wood', n: 'نركيلة نعناع', e: 'Mint Hookah', p: 4000, img: 'hookah.jpg', da: 'نركيلة خشب بالنعناع، نقية ومنعشة.', de: 'Wood hookah with pure, fresh mint.' },
+    { id: 'hw06', cat: 'hookah_wood', n: 'نركيلة تفاحة', e: 'Apple Hookah', p: 5000, img: 'hookah.jpg', da: 'نركيلة خشب بنكهة التفاح الحلو المميزة.', de: 'Wood hookah with sweet, signature apple flavor.' },
+    { id: 'hw07', cat: 'hookah_wood', n: 'نركيلة تفاحتين', e: 'Double Apple Hookah', p: 4000, img: 'hookah.jpg', da: 'نركيلة خشب بالتفاحتين، الأقوى والأغنى نكهة.', de: 'Wood hookah with double apple; bolder and richer.' }
   ])
 };
 

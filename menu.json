@@ -500,7 +500,7 @@
       "name_en": "Nescafe",
       "desc_ar": "نسكافيه ساخن محضّر بعناية مع الحليب، سريع ولذيذ.",
       "desc_en": "Hot Nescafe prepared with care and milk; quick and tasty.",
-      "price": 2000,
+      "price": 2500,
       "image": "assets/images/hot-1.jpg"
     },
     {
@@ -572,7 +572,7 @@
       "name_en": "Cappuccino",
       "desc_ar": "كابتشينو برغوة حليب كثيفة، كلاسيكي متوازن ومحبوب.",
       "desc_en": "Cappuccino with thick milk foam; a balanced, beloved classic.",
-      "price": 1500,
+      "price": 3500,
       "image": "assets/images/hot-7.jpg"
     },
     {
@@ -585,6 +585,30 @@
       "desc_ar": "شوت إسبريسو مركّز، طاقتك القهوة الأصيلة بنكهة كاملة.",
       "desc_en": "A concentrated espresso shot; pure coffee energy with full flavor.",
       "price": 2500,
+      "image": "assets/images/hot-8.jpg"
+    },
+    {
+      "id": "h10",
+      "category_id": "hot",
+      "sort": 43.1,
+      "tags": [],
+      "name_ar": "اسبريسو سنكل شوت",
+      "name_en": "Espresso Single Shot",
+      "desc_ar": "شوت إسبريسو واحد مركّز، نكهة قهوة أصيلة وقوية في جرعة صغيرة.",
+      "desc_en": "A single concentrated espresso shot; pure, bold coffee flavor in a small dose.",
+      "price": 2500,
+      "image": "assets/images/hot-8.jpg"
+    },
+    {
+      "id": "h11",
+      "category_id": "hot",
+      "sort": 43.2,
+      "tags": [],
+      "name_ar": "اسبريسو دبل شوت",
+      "name_en": "Espresso Double Shot",
+      "desc_ar": "شوتان من الإسبريسو المركّز، طاقة أكبر ونكهة أغنى لعشاق القهوة.",
+      "desc_en": "A double concentrated espresso shot; more energy and a richer flavor.",
+      "price": 3500,
       "image": "assets/images/hot-8.jpg"
     },
     {
@@ -789,7 +813,7 @@
       "desc_ar": "نركيلة رواق الطبيعية بخليط رواق الخاص وتجربة رواق الكاملة.",
       "desc_en": "Riwaq Signature Natural Hookah with our exclusive blend and the full Riwaq experience.",
       "price": 15000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb02",
@@ -801,7 +825,7 @@
       "desc_ar": "نركيلة بابلي بنكهة رواق المميزة، دخنة وغنية.",
       "desc_en": "Bably hookah with Riwaq’s signature flavor; smooth and rich.",
       "price": 7000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb03",
@@ -813,7 +837,7 @@
       "desc_ar": "نركيلة بابلي بنكهة باونتي بجوز الهند والشوكولاتة.",
       "desc_en": "Bably hookah with a chocolate-coconut Bounty treat.",
       "price": 6000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb04",
@@ -825,7 +849,7 @@
       "desc_ar": "نركيلة بابلي بعنب مدخّن غني النكهة.",
       "desc_en": "Bably hookah with a rich, smoky grape flavor.",
       "price": 6000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb05",
@@ -837,7 +861,7 @@
       "desc_ar": "نركيلة بابلي بنعناع منعش وبارد.",
       "desc_en": "Bably hookah with a cool, refreshing mint.",
       "price": 6000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb06",
@@ -849,7 +873,7 @@
       "desc_ar": "نركيلة بابلي بمزيج العلج والنعناع الكلاسيكي.",
       "desc_en": "Bably hookah with the classic gum and mint mix.",
       "price": 6000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb07",
@@ -861,7 +885,7 @@
       "desc_ar": "نركيلة بابلي بنكهة الفواكه الإنجليزية الكلاسيكية.",
       "desc_en": "Bably hookah with the classic English fruity flavor.",
       "price": 6000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hb08",
@@ -873,7 +897,7 @@
       "desc_ar": "نركيلة بابلي بالليمون والنعناع، طازجة ومنتعشة.",
       "desc_en": "Bably hookah with lemon and mint; fresh and zesty.",
       "price": 6000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw01",
@@ -885,7 +909,7 @@
       "desc_ar": "نركيلة خشب بالليمون والنعناع، منعشة وكلاسيكية.",
       "desc_en": "Wood hookah with lemon and mint; refreshing and classic.",
       "price": 4000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw02",
@@ -897,7 +921,7 @@
       "desc_ar": "نركيلة خشب بطابع مساء موسكو، نكهة مميزة ودخنة ناعمة.",
       "desc_en": "Wood hookah with a Moscow-evening mood, distinctive flavor and smooth smoke.",
       "price": 4000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw03",
@@ -909,7 +933,7 @@
       "desc_ar": "نركيلة خشب بنكهة إنجليزية كلاسيكية.",
       "desc_en": "Wood hookah with an English-style classic flavor.",
       "price": 4000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw04",
@@ -921,7 +945,7 @@
       "desc_ar": "نركيلة خشب بمزيج العلج والنعناع المتوازن.",
       "desc_en": "Wood hookah with a balanced gum and mint mix.",
       "price": 4000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw05",
@@ -933,7 +957,7 @@
       "desc_ar": "نركيلة خشب بالنعناع، نقية ومنعشة.",
       "desc_en": "Wood hookah with pure, fresh mint.",
       "price": 4000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw06",
@@ -944,8 +968,8 @@
       "name_en": "Apple Hookah",
       "desc_ar": "نركيلة خشب بنكهة التفاح الحلو المميزة.",
       "desc_en": "Wood hookah with sweet, signature apple flavor.",
-      "price": 4000,
-      "image": ""
+      "price": 5000,
+      "image": "assets/images/hookah.jpg"
     },
     {
       "id": "hw07",
@@ -957,7 +981,7 @@
       "desc_ar": "نركيلة خشب بالتفاحتين، الأقوى والأغنى نكهة.",
       "desc_en": "Wood hookah with double apple; bolder and richer.",
       "price": 4000,
-      "image": ""
+      "image": "assets/images/hookah.jpg"
     }
   ]
 }
